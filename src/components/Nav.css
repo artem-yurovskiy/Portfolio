@@ -1,0 +1,219 @@
+.nav {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 100;
+  display: flex;
+  flex-direction: column;
+  background: rgba(8, 13, 22, 0.6);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border-bottom: 1px solid rgba(148, 163, 184, 0.14);
+}
+
+.nav__inner {
+  width: 100%;
+  max-width: 1360px;
+  height: var(--nav-height);
+  margin: 0 auto;
+  padding: 0 clamp(1.5rem, 6vw, 5rem);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.nav__mark {
+  font-family: 'Inter', system-ui, sans-serif;
+  font-weight: 600;
+  font-size: 0.95rem;
+  letter-spacing: -0.01em;
+  color: var(--name-warm-white);
+  text-decoration: none;
+}
+
+.nav__right {
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+}
+
+.nav__links {
+  display: flex;
+  align-items: center;
+  gap: 2.5rem;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.nav__links a {
+  font-family: 'Inter', system-ui, sans-serif;
+  font-size: 0.95rem;
+  color: var(--body-slate);
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+
+.nav__links a:hover {
+  color: var(--name-warm-white);
+}
+
+.nav__mark:focus-visible,
+.nav__links a:focus-visible {
+  outline: 1px solid var(--portrait-border);
+  outline-offset: 4px;
+  border-radius: 2px;
+}
+
+.nav__resume {
+  display: inline-flex;
+  align-items: center;
+  border-radius: 999px;
+  padding: 0.5rem 1.15rem;
+  background: var(--name-warm-white);
+  color: var(--navy-deep);
+  font-family: 'Inter', system-ui, sans-serif;
+  font-weight: 600;
+  font-size: 0.85rem;
+  text-decoration: none;
+  transition: opacity 0.2s ease;
+}
+
+.nav__resume:hover {
+  opacity: 0.88;
+}
+
+.nav__resume:focus-visible {
+  outline: 1px solid var(--portrait-border);
+  outline-offset: 2px;
+}
+
+.nav__toggle {
+  display: none;
+  width: 2.25rem;
+  height: 2.25rem;
+  align-items: center;
+  justify-content: center;
+  background: none;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+}
+
+.nav__toggle:focus-visible {
+  outline: 1px solid var(--portrait-border);
+  outline-offset: 2px;
+  border-radius: 2px;
+}
+
+.nav__toggle-bar {
+  position: relative;
+  display: block;
+  width: 20px;
+  height: 1px;
+  background: var(--name-warm-white);
+  transition:
+    background 0.2s ease 0.05s,
+    opacity 0.2s ease 0.05s;
+}
+
+.nav__toggle-bar::before,
+.nav__toggle-bar::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  width: 20px;
+  height: 1px;
+  background: var(--name-warm-white);
+  transition:
+    top 0.2s ease,
+    transform 0.2s ease 0.2s;
+}
+
+.nav__toggle-bar::before {
+  top: -6px;
+}
+
+.nav__toggle-bar::after {
+  top: 6px;
+}
+
+.nav__toggle-bar--open {
+  background: transparent;
+}
+
+.nav__toggle-bar--open::before,
+.nav__toggle-bar--open::after {
+  transition:
+    top 0.2s ease,
+    transform 0.2s ease 0.05s;
+}
+
+.nav__toggle-bar--open::before {
+  top: 0;
+  transform: rotate(45deg);
+}
+
+.nav__toggle-bar--open::after {
+  top: 0;
+  transform: rotate(-45deg);
+}
+
+.nav__mobile {
+  display: none;
+}
+
+@media (max-width: 720px) {
+  .nav__links {
+    display: none;
+  }
+
+  .nav__toggle {
+    display: flex;
+  }
+
+  .nav__mobile {
+    display: grid;
+    grid-template-rows: 0fr;
+    background: rgba(8, 13, 22, 0.92);
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+    border-bottom: 1px solid rgba(148, 163, 184, 0.14);
+    transition: grid-template-rows 0.25s ease;
+  }
+
+  .nav__mobile--open {
+    grid-template-rows: 1fr;
+  }
+
+  .nav__mobile-list {
+    overflow: hidden;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+
+  .nav__mobile a {
+    display: block;
+    padding: 1rem clamp(1.5rem, 6vw, 5rem);
+    font-family: 'Inter', system-ui, sans-serif;
+    font-size: 0.95rem;
+    color: var(--body-slate);
+    text-decoration: none;
+  }
+
+  .nav__mobile a:hover,
+  .nav__mobile a:focus-visible {
+    color: var(--name-warm-white);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .nav__toggle-bar,
+  .nav__toggle-bar::before,
+  .nav__toggle-bar::after,
+  .nav__mobile {
+    transition: none;
+  }
+}

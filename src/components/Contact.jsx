@@ -26,7 +26,7 @@ const CONTACT_LINKS = [
   },
   {
     label: 'LinkedIn',
-    href: 'https://www.linkedin.com/in/artem-yurovskiy-6b4b82272/',
+    href: 'https://www.linkedin.com/in/artem-yurovskiy/',
     Icon: LinkedinIcon,
     external: true,
   },

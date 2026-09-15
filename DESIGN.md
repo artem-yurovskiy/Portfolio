@@ -137,7 +137,9 @@ One signature silhouette: the organic soft-arch portrait frame, built from an as
 - **Background:** radial gradient from Navy Panel-adjacent (#24314a) through #141c29 to #0b111a.
 - **Border:** 1px solid Portrait Border color.
 - **Glow:** blurred radial Portrait Glow halo behind the frame, plus the ambient box-shadow above.
-- **Content:** currently holds a synthetic placeholder mark (a simple outlined head-and-shoulders SVG glyph, `hero__portrait-mark`, at 38% of the frame's size) with an explicit `aria-label="Portrait placeholder for Artem Yurovskiy"` and a `TODO` comment in `Header.jsx` marking it for replacement with a real photo. This is a documented interim state, not a design-system icon pattern — do not reuse this glyph or an icon-based placeholder approach elsewhere in the system.
+- **Content:** holds Artem's real headshot (`/Headshot.jpg`, `hero__portrait-img`), `object-fit: cover` filling the frame at 100% width/height with `overflow: hidden` on the frame clipping it to the frame's shape (currently in flux — see note below). The frame's radial-gradient background remains as the fallback fill visible only during image load. The earlier outlined head-and-shoulders SVG placeholder has been fully replaced — do not reintroduce it or a similar icon-based placeholder elsewhere in the system.
+
+> Note: the frame's shape (`.hero__portrait` in `Header.css`) was changed from the organic soft-arch radius to a plain circle (`border-radius: 50%`, `aspect-ratio: 1`) in a hand edit made outside this documentation pass, and the image now carries `transform: scale(0.85)`. That scale shrinks the covering image below what the circle needs, exposing the frame's dark background in the corners — worth a fix or a revert. The rest of this section (Shape, Shapes, Do's) still describes the original arch and has not been reconciled with the circle yet.
 
 ### Eyebrow + Name + Bio Block
 - **Style:** left-aligned (center-aligned on mobile) stack. The eyebrow ("Hi, I'm" + fading hairline rule) sits `1.5rem` above the name; name directly followed by bio with `2.25rem` top margin.

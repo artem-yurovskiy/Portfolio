@@ -1,7 +1,7 @@
 const SKILL_GROUPS = [
   {
     title: 'Languages',
-    items: ['Python', 'JavaScript', 'TypeScript', 'Java', 'C', 'SQL', 'HTML/CSS'],
+    items: ['Python', 'JavaScript', 'TypeScript', 'Java', 'C', 'C++', 'SQL', 'HTML/CSS'],
   },
   {
     title: 'Product & Business',
@@ -16,10 +16,14 @@ const SKILL_GROUPS = [
   {
     title: 'Frameworks & Tools',
     items: [
+      'React',
       'React Native',
+      'Next.js',
       'FastAPI',
       'SQLAlchemy',
       'Node.js',
+      'Express',
+      'Tailwind CSS',
       'Bootstrap',
       'JavaFX',
       'Java Swing',
@@ -30,6 +34,13 @@ const SKILL_GROUPS = [
       'Expo',
       'JUnit',
       'Postgres',
+      'VSCode',
+      'IntelliJ',
+      'Eclipse',
+      'Linux',
+      'Postman',
+      'GDB',
+      'Valgrind',
     ],
   },
   {

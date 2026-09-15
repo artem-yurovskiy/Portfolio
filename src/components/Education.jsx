@@ -53,7 +53,7 @@ function Education() {
         </h2>
 
         <div className="flex flex-col gap-4 border-t border-white/10 pt-8 sm:flex-row sm:items-baseline sm:justify-between sm:gap-8 sm:pt-10">
-          <p className="text-xl font-semibold text-[#f5f6f8] sm:text-2xl">
+          <p className="text-[clamp(1.75rem,3.2vw,2.5rem)] font-bold leading-tight tracking-[-0.02em] text-[#f5f6f8]">
             B.S. in Computer Science
           </p>
           <div className="flex flex-col gap-1.5 text-base text-[#a6aebb] sm:items-end sm:text-right">

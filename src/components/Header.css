@@ -90,7 +90,7 @@
   display: flex;
   justify-content: center;
   align-self: center;
-  margin-top: -3.5rem;
+  margin-top: -1.5rem;
   animation: hero-rise 1s cubic-bezier(0.16, 1, 0.3, 1) 0.28s both;
 }
 
@@ -110,12 +110,10 @@
 .hero__portrait {
   position: relative;
   z-index: 1;
-  width: clamp(320px, 34vw, 520px);
+  width: clamp(280px, 30vw, 460px);
   aspect-ratio: 0.86;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  border-radius: 46% 46% 40% 40% / 58% 58% 34% 34%;
+  overflow: hidden;
+  border-radius: 16px;
   border: 1px solid var(--portrait-border);
   background: radial-gradient(
     circle at 34% 28%,
@@ -127,12 +125,13 @@
     inset 0 1px 0 rgba(255, 255, 255, 0.04),
     0 50px 110px -30px var(--portrait-glow),
     0 0 90px -20px var(--portrait-glow);
-  color: var(--portrait-icon);
 }
 
-.hero__portrait-mark {
-  width: 38%;
-  height: 38%;
+.hero__portrait-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
 }
 
 @keyframes hero-rise {

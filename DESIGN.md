@@ -46,8 +46,8 @@ components:
   hero-portrait-frame:
     backgroundColor: "{colors.navy-panel}"
     textColor: "{colors.body-slate}"
-    rounded: "46% 46% 40% 40% / 58% 58% 34% 34%"
-    width: "clamp(320px, 34vw, 520px)"
+    rounded: "50%"
+    width: "clamp(280px, 30vw, 460px)"
 ---
 
 # Design System: Artem Yurovskiy Portfolio
@@ -64,7 +64,7 @@ The palette is a single dark neutral family with no accent color, no gradient te
 - Single dark navy ground built from three stacked gradient stops, no secondary/tertiary palette
 - One warm off-white for the name, one muted slate for body copy — no accent color anywhere
 - A single small-caps eyebrow ("Hi, I'm") with a short fading hairline rule introduces the name, at the user's explicit request
-- One signature shape: the organic soft-arch portrait frame with ambient glow and hairline border
+- One signature shape: the circular portrait frame with ambient glow and hairline border
 - One motion signature: a staggered rise-and-fade entrance, reused per element with increasing delay
 
 ## Colors
@@ -128,18 +128,16 @@ No card shadows or tonal surface layering. Depth is entirely atmospheric: a radi
 
 ## Shapes
 
-One signature silhouette: the organic soft-arch portrait frame, built from an asymmetric border-radius (`46% 46% 40% 40% / 58% 58% 34% 34%`) rather than a circle or a rounded rectangle — rounder at the top, flatter at the base, evoking an arch without being a literal architectural shape. It carries a 1px hairline border in the muted portrait-border color. No other element in the hero uses a border, radius, or clipping; the rest of the layout is unbordered text on the gradient ground.
+One signature silhouette: the circular portrait frame, a plain circle (`border-radius: 50%`, aspect-ratio 1) rather than a rounded rectangle. It carries a 1px hairline border in the muted portrait-border color. No other element in the hero uses a border, radius, or clipping; the rest of the layout is unbordered text on the gradient ground.
 
 ## Components
 
 ### Hero Portrait Frame (signature component)
-- **Shape:** organic soft-arch (`border-radius: 46% 46% 40% 40% / 58% 58% 34% 34%`), aspect-ratio 0.86, fluid width `clamp(320px, 34vw, 520px)`.
+- **Shape:** circle (`border-radius: 50%`, aspect-ratio 1), fluid width `clamp(280px, 30vw, 460px)`.
 - **Background:** radial gradient from Navy Panel-adjacent (#24314a) through #141c29 to #0b111a.
 - **Border:** 1px solid Portrait Border color.
 - **Glow:** blurred radial Portrait Glow halo behind the frame, plus the ambient box-shadow above.
-- **Content:** holds Artem's real headshot (`/Headshot.jpg`, `hero__portrait-img`), `object-fit: cover` filling the frame at 100% width/height with `overflow: hidden` on the frame clipping it to the frame's shape (currently in flux — see note below). The frame's radial-gradient background remains as the fallback fill visible only during image load. The earlier outlined head-and-shoulders SVG placeholder has been fully replaced — do not reintroduce it or a similar icon-based placeholder elsewhere in the system.
-
-> Note: the frame's shape (`.hero__portrait` in `Header.css`) was changed from the organic soft-arch radius to a plain circle (`border-radius: 50%`, `aspect-ratio: 1`) in a hand edit made outside this documentation pass, and the image now carries `transform: scale(0.85)`. That scale shrinks the covering image below what the circle needs, exposing the frame's dark background in the corners — worth a fix or a revert. The rest of this section (Shape, Shapes, Do's) still describes the original arch and has not been reconciled with the circle yet.
+- **Content:** holds Artem's real headshot (`/Headshot.jpg`, `hero__portrait-img`), `object-fit: cover` filling the frame at 100% width/height with `overflow: hidden` clipping it to the circle — no scale transform on the image, so cover fills the circle edge-to-edge with no corner gaps. The frame's radial-gradient background remains as the fallback fill visible only during image load. The earlier outlined head-and-shoulders SVG placeholder has been fully replaced — do not reintroduce it or a similar icon-based placeholder elsewhere in the system.
 
 ### Eyebrow + Name + Bio Block
 - **Style:** left-aligned (center-aligned on mobile) stack. The eyebrow ("Hi, I'm" + fading hairline rule) sits `1.5rem` above the name; name directly followed by bio with `2.25rem` top margin.
@@ -161,7 +159,7 @@ One signature silhouette: the organic soft-arch portrait frame, built from an as
 - **Do** keep hierarchy to one type family (Inter) differentiated by weight and size, not by introducing a second font.
 - **Do** reserve the warm-white name color exclusively for the name/primary heading; body copy and the eyebrow stay at the muted slate value.
 - **Do** use the shared `hero-rise` keyframe and cubic-bezier for any new entrance motion on this surface, staggering delay rather than inventing a new easing curve.
-- **Do** treat the organic soft-arch radius formula as the system's one signature shape rather than introducing circles or standard rounded rectangles for imagery.
+- **Do** treat the circular frame as the system's one signature shape for imagery rather than introducing rounded rectangles or other silhouettes.
 - **Do** keep the eyebrow to this one quiet instance (label + short fading rule, light weight, wide tracking) if it is ever reused on another surface — it was added at the user's explicit request, overriding the craft floor's default kicker ban, and should stay this restrained rather than growing into a heavier label system.
 - **Do** register every new section's anchor in `Nav.jsx`'s `LINKS` array and give that section `scroll-margin-top: var(--nav-height)` — an anchorable section with neither is a broken nav link waiting to happen.
 

@@ -12,6 +12,7 @@
     ),
     linear-gradient(160deg, var(--navy-mid) 0%, var(--navy-deep) 65%);
   padding: clamp(3rem, 8vw, 6rem) clamp(1.5rem, 6vw, 5rem);
+  padding-top: max(var(--nav-height), clamp(3rem, 8vw, 6rem));
 }
 
 .hero__glow {
@@ -111,9 +112,9 @@
   position: relative;
   z-index: 1;
   width: clamp(280px, 30vw, 460px);
-  aspect-ratio: 0.86;
+  aspect-ratio: 1;
   overflow: hidden;
-  border-radius: 16px;
+  border-radius: 50%;
   border: 1px solid var(--portrait-border);
   background: radial-gradient(
     circle at 34% 28%,
@@ -163,6 +164,7 @@
   .hero {
     min-height: auto;
     padding: clamp(3.5rem, 12vw, 5rem) 1.5rem;
+    padding-top: max(var(--nav-height), clamp(3.5rem, 12vw, 5rem));
   }
 
   .hero__inner {

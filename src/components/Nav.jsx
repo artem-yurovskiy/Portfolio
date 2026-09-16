@@ -12,8 +12,6 @@ const LINKS = [
   { href: '#contact', label: 'Contact' },
 ]
 
-const RESUME_PATH = '/Artem_Yurovskiy_Resume.pdf'
-
 function Nav() {
   const [open, setOpen] = useState(false)
 
@@ -33,7 +31,7 @@ function Nav() {
             ))}
           </ul>
 
-          <a href={RESUME_PATH} download="Artem_Yurovskiy_Resume.pdf" className="nav__resume">
+          <a href="#resume" className="nav__resume" onClick={() => setOpen(false)}>
             Resume
           </a>
 

@@ -1,179 +1,311 @@
-import { useState } from 'react'
-import { ChevronDown } from 'lucide-react'
+import { useEffect, useRef, useState } from 'react'
+import { ArrowRight, ArrowUpRight, X } from 'lucide-react'
+import { PROJECTS } from '../data/projects'
 
-const PROJECTS = [
-  {
-    name: 'Forge',
-    description:
-      'Forge is a full-stack mobile fitness and social app I helped build as part of a 6-person Agile team across 3 sprints. It combines workout tracking, diet logging, social feeds, and AI-assisted fitness guidance.',
-    bullets: [
-      'Built 6 features end to end, including workout scheduling, accessibility settings, push notification scheduling, a friends activity feed, and AI-powered meal recommendations, owning the frontend, backend, and tests for each.',
-      'Wired the OpenAI API into a FastAPI endpoint to generate structured, personalized meal recommendations, then integrated the feature into the React Native frontend.',
-      'Built push notification scheduling with Expo Notifications, letting users set reminders tied to their planned workouts and meals.',
-      "Contributed to the team's design document and helped define 59 user stories in the product backlog, shaping the app's core features.",
-    ],
-    tags: ['React Native', 'TypeScript', 'FastAPI', 'SQLAlchemy', 'OpenAI API'],
-    liveUrl: null,
-    githubUrl: 'https://github.com/artem-yurovskiy/Forge',
-  },
-  {
-    name: 'Online Marketplace',
-    description:
-      'Online Marketplace is a Java client-server application I built to support concurrent buyers and sellers, handling store browsing, shopping carts, and purchase history through a custom multithreaded backend.',
-    bullets: [
-      'Designed a Swing GUI for browsing stores, managing carts, and switching between buyer and seller roles.',
-      'Built a multithreaded socket server in Java, running each client connection on its own dedicated thread to support real concurrent sessions.',
-      'Validated User, Seller, Customer, Product, and Store logic with JUnit tests under 1-second timeouts.',
-      'Implemented persistent storage via object serialization, saving cart and purchase data across sessions without a database.',
-    ],
-    tags: ['Java', 'Swing', 'Socket Programming', 'Multithreading', 'JUnit'],
-    liveUrl: null,
-    githubUrl: 'https://github.com/artem-yurovskiy/Online-Marketplace',
-  },
-  {
-    name: 'Custom Memory Allocator',
-    description:
-      "Custom Memory Allocator is a low-level systems project where I implemented my own heap allocator in C, managing memory manually instead of relying on the standard library's malloc and free.",
-    bullets: [
-      'Implemented a custom heap allocator in C using low-level pointer manipulation and boundary tags to track allocated and free memory blocks.',
-      'Designed free list management to track available memory blocks and support efficient allocation and deallocation.',
-      'Built block splitting logic to divide larger free blocks into smaller ones, reducing wasted space on small allocations.',
-      'Implemented immediate coalescing to merge adjacent free blocks back together, minimizing fragmentation and improving memory reuse over time.',
-    ],
-    tags: ['C', 'Systems Programming', 'Memory Management'],
-    liveUrl: null,
-    githubUrl: null,
-  },
-  {
-    name: 'Wordle Unlimited',
-    description:
-      'Wordle Unlimited is a JavaFX desktop clone of the NYT word game, where players get six guesses to find a five-letter word, complete with animated feedback and a statistics dashboard tracking performance over time.',
-    bullets: [
-      'Built the core game logic in Java, validating guesses letter by letter and generating a new target word each round.',
-      'Implemented custom tile-flip animations in JavaFX to visually reveal correct, misplaced, and incorrect letters after each guess.',
-      "Built a statistics dashboard using JavaFX's charting library to track win percentage, current streak, and guess distribution across games.",
-    ],
-    tags: ['Java', 'JavaFX', 'Maven'],
-    liveUrl: null,
-    githubUrl: 'https://github.com/artem-yurovskiy/Wordle-Unlimited',
-  },
-]
+const MODAL_TRANSITION_MS = 250
 
-function ProjectLink({ href, children }) {
+function ProjectScreenshot({ src, alt, containerClassName = '', imgClassName = '' }) {
   return (
-    <a
-      href={href}
-      target="_blank"
-      rel="noopener noreferrer"
-      className="text-[var(--name-warm-white)] underline decoration-[var(--portrait-border)] underline-offset-4 transition-colors hover:decoration-[var(--name-warm-white)]"
+    <div
+      className={`flex items-center justify-center overflow-hidden bg-[#080F1C] ${containerClassName}`}
     >
-      {children}
-    </a>
+      <img
+        src={src}
+        alt={alt}
+        loading="lazy"
+        className={`h-auto w-auto max-h-full max-w-full object-contain ${imgClassName}`}
+      />
+    </div>
   )
 }
 
-function slugify(name) {
-  return name.toLowerCase().replace(/[^a-z0-9]+/g, '-')
-}
-
-function ProjectEntry({ project }) {
-  const [open, setOpen] = useState(false)
-  const highlightsId = `project-highlights-${slugify(project.name)}`
+function TechTags({ technologies, limit }) {
+  const list = limit ? technologies.slice(0, limit) : technologies
 
   return (
-    <article className="flex flex-col gap-6 border-t border-white/10 pt-10 sm:pt-12">
-      <div className="flex flex-col gap-3 sm:flex-row sm:items-baseline sm:justify-between sm:gap-8">
-        <p className="text-xl font-bold text-[var(--name-warm-white)] sm:text-2xl">
-          {project.name}
+    <ul className="flex flex-wrap gap-2">
+      {list.map((tech) => (
+        <li key={tech}>
+          <span className="inline-flex rounded-full border border-white/15 bg-[var(--navy-mid)] px-3 py-1 text-[13px] font-medium text-[var(--body-slate)]">
+            {tech}
+          </span>
+        </li>
+      ))}
+    </ul>
+  )
+}
+
+function ProjectCard({ project, onOpen }) {
+  return (
+    <button
+      type="button"
+      onClick={onOpen}
+      className="group flex flex-col overflow-hidden rounded-[18px] border border-white/10 bg-[var(--navy-panel)] text-left transition-[transform,box-shadow,border-color] duration-300 hover:-translate-y-1 hover:border-[#7EAFFF]/35 hover:shadow-[0_0_60px_-28px_rgba(126,175,255,0.5)] focus-visible:outline focus-visible:outline-2 focus-visible:outline-[#7EAFFF] focus-visible:outline-offset-4"
+    >
+      <ProjectScreenshot
+        src={project.image}
+        alt={`${project.title} project screenshot`}
+        containerClassName="h-[200px] w-full shrink-0 border-b border-white/10 p-6"
+        imgClassName="rounded-[8px] transition-transform duration-300 group-hover:scale-[1.02]"
+      />
+
+      <div className="flex flex-1 flex-col gap-3 p-7">
+        <div className="flex items-start justify-between gap-4">
+          <h3 className="text-xl font-bold text-[var(--name-warm-white)] sm:text-[1.375rem]">
+            {project.title}
+          </h3>
+          <ArrowRight
+            className="mt-1.5 h-5 w-5 shrink-0 text-[#7EAFFF] transition-transform duration-300 group-hover:translate-x-1"
+            aria-hidden="true"
+          />
+        </div>
+
+        <p className="text-[0.95rem] leading-relaxed text-[var(--body-slate)]">
+          {project.shortDescription}
         </p>
-        <div className="flex gap-5 text-base font-semibold text-[var(--body-slate)]">
-          {project.liveUrl && <ProjectLink href={project.liveUrl}>Live Demo</ProjectLink>}
-          {project.githubUrl && <ProjectLink href={project.githubUrl}>GitHub</ProjectLink>}
+
+        <div className="mt-auto pt-4">
+          <TechTags technologies={project.technologies} limit={3} />
         </div>
       </div>
+    </button>
+  )
+}
 
-      <p className="max-w-[68ch] text-lg font-semibold leading-relaxed text-[var(--name-warm-white)] sm:text-xl">
-        {project.description}
-      </p>
+function ProjectModal({ project, onRequestClose }) {
+  const [visible, setVisible] = useState(false)
+  const dialogRef = useRef(null)
+  const closeButtonRef = useRef(null)
+  const closingRef = useRef(false)
 
-      <ul className="flex flex-wrap gap-2.5">
-        {project.tags.map((tag) => (
-          <li key={tag}>
-            <span className="inline-flex rounded-full border border-white/15 px-3.5 py-1.5 text-sm font-medium text-[var(--body-slate)]">
-              {tag}
+  useEffect(() => {
+    const frame = requestAnimationFrame(() => setVisible(true))
+    return () => cancelAnimationFrame(frame)
+  }, [])
+
+  function handleClose() {
+    if (closingRef.current) return
+    closingRef.current = true
+    setVisible(false)
+    window.setTimeout(onRequestClose, MODAL_TRANSITION_MS)
+  }
+
+  useEffect(() => {
+    const previouslyFocused = document.activeElement
+    const previousOverflow = document.body.style.overflow
+    document.body.style.overflow = 'hidden'
+    closeButtonRef.current?.focus()
+
+    function handleKeyDown(event) {
+      if (event.key === 'Escape') {
+        event.stopPropagation()
+        handleClose()
+        return
+      }
+
+      if (event.key === 'Tab') {
+        const focusable = dialogRef.current?.querySelectorAll(
+          'a[href], button:not([disabled]), [tabindex]:not([tabindex="-1"])'
+        )
+        if (!focusable || focusable.length === 0) return
+
+        const first = focusable[0]
+        const last = focusable[focusable.length - 1]
+
+        if (event.shiftKey && document.activeElement === first) {
+          event.preventDefault()
+          last.focus()
+        } else if (!event.shiftKey && document.activeElement === last) {
+          event.preventDefault()
+          first.focus()
+        }
+      }
+    }
+
+    document.addEventListener('keydown', handleKeyDown, true)
+    return () => {
+      document.removeEventListener('keydown', handleKeyDown, true)
+      document.body.style.overflow = previousOverflow
+      if (previouslyFocused instanceof HTMLElement) previouslyFocused.focus()
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [])
+
+  const hasLinks = Boolean(project.liveUrl || project.githubUrl)
+
+  return (
+    <div className="fixed inset-0 z-[200] flex items-center justify-center p-4 sm:p-6">
+      <div
+        className={`absolute inset-0 bg-black/70 backdrop-blur-sm transition-opacity duration-[250ms] ease-out ${
+          visible ? 'opacity-100' : 'opacity-0'
+        }`}
+        onClick={handleClose}
+        aria-hidden="true"
+      />
+
+      <div
+        ref={dialogRef}
+        role="dialog"
+        aria-modal="true"
+        aria-labelledby="project-modal-title"
+        className={`relative flex w-full max-w-[900px] flex-col overflow-hidden rounded-[16px] border border-white/10 bg-[var(--navy-panel)] shadow-[0_0_120px_-40px_rgba(126,175,255,0.4)] transition-all duration-[250ms] ease-out sm:rounded-[22px] ${
+          visible ? 'translate-y-0 opacity-100' : 'translate-y-4 opacity-0'
+        }`}
+        style={{ maxHeight: '95vh' }}
+      >
+        <div className="flex items-start justify-between gap-4 border-b border-white/10 p-5 sm:p-8">
+          <div className="flex flex-col gap-2">
+            <span className="text-[0.75rem] font-medium uppercase tracking-[0.3em] text-[var(--body-slate)]">
+              Project
             </span>
-          </li>
-        ))}
-      </ul>
+            <h3
+              id="project-modal-title"
+              className="text-[clamp(1.75rem,4.5vw,2.5rem)] font-bold leading-tight tracking-tight text-[var(--name-warm-white)]"
+            >
+              {project.title}
+            </h3>
+          </div>
+          <button
+            ref={closeButtonRef}
+            type="button"
+            onClick={handleClose}
+            aria-label="Close project details"
+            className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full border border-white/15 text-[var(--body-slate)] transition-colors duration-200 hover:border-white/30 hover:text-[var(--name-warm-white)]"
+          >
+            <X className="h-5 w-5" aria-hidden="true" />
+          </button>
+        </div>
 
-      <div>
-        <button
-          type="button"
-          onClick={() => setOpen((value) => !value)}
-          aria-expanded={open}
-          aria-controls={highlightsId}
-          className="group flex w-full items-center justify-between gap-4 border-t border-white/10 pt-6 text-left transition-colors focus-visible:rounded-sm focus-visible:outline focus-visible:outline-1 focus-visible:outline-[var(--portrait-border)] focus-visible:outline-offset-4"
-        >
-          <span className="flex items-baseline gap-2">
-            <span className="text-lg font-bold text-[var(--name-warm-white)] sm:text-xl">
-              Highlights
-            </span>
-            <span className="text-sm font-medium text-[var(--body-slate)]">
-              {open ? 'Hide' : 'Click to view'}
-            </span>
-          </span>
-          <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full border border-white/15 text-[var(--body-slate)] transition-colors group-hover:border-white/35 group-hover:text-[var(--name-warm-white)]">
-            <ChevronDown
-              className={`h-4 w-4 transition-transform duration-200 motion-reduce:transition-none ${
-                open ? 'rotate-180' : ''
-              }`}
-              aria-hidden="true"
-            />
-          </span>
-        </button>
+        <div className="overflow-y-auto p-5 sm:p-8">
+          <ProjectScreenshot
+            src={project.image}
+            alt={`${project.title} project screenshot`}
+            containerClassName="w-full rounded-[14px] border border-white/10 p-6 sm:p-10"
+            imgClassName="max-h-[350px] rounded-[8px] sm:max-h-[450px]"
+          />
 
-        <div
-          className={`grid transition-[grid-template-rows] duration-300 ease-out motion-reduce:transition-none ${
-            open ? 'grid-rows-[1fr]' : 'grid-rows-[0fr]'
-          }`}
-        >
-          <ul id={highlightsId} className="overflow-hidden pt-4 sm:columns-2 sm:gap-x-8">
-            {project.bullets.map((bullet) => (
-              <li
-                key={bullet}
-                className="mb-3 flex break-inside-avoid items-start gap-3 text-[var(--body-slate)]"
-              >
-                <span
-                  className="mt-[0.65em] h-px w-4 shrink-0 bg-[var(--portrait-border)]"
-                  aria-hidden="true"
-                />
-                <span className="text-[1.0625rem] font-medium leading-relaxed">{bullet}</span>
-              </li>
-            ))}
-          </ul>
+          <p className="mt-8 text-[1.0625rem] leading-relaxed text-[var(--body-slate)] sm:text-lg">
+            {project.description}
+          </p>
+
+          <div className="mt-9">
+            <h4 className="text-[0.75rem] font-medium uppercase tracking-[0.3em] text-[#7EAFFF]">
+              What I Built
+            </h4>
+            <ul className="mt-5 flex flex-col gap-4">
+              {project.highlights.map((highlight) => (
+                <li key={highlight} className="flex items-start gap-3">
+                  <span
+                    className="mt-[0.55em] h-1.5 w-1.5 shrink-0 rounded-full bg-[#7EAFFF]"
+                    aria-hidden="true"
+                  />
+                  <span className="text-[15px] leading-relaxed text-[var(--body-slate)] sm:text-base">
+                    {highlight}
+                  </span>
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          <div className="mt-9">
+            <h4 className="text-[0.75rem] font-medium uppercase tracking-[0.3em] text-[var(--body-slate)]">
+              Built With
+            </h4>
+            <div className="mt-5">
+              <TechTags technologies={project.technologies} />
+            </div>
+          </div>
+
+          {hasLinks && (
+            <div className="mt-9 flex flex-wrap gap-3">
+              {project.liveUrl && (
+                <a
+                  href={project.liveUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-2 rounded-full border border-white/15 px-5 py-2.5 text-sm font-medium text-[var(--name-warm-white)] transition-colors duration-200 hover:border-[#7EAFFF]/40 hover:bg-[#7EAFFF]/[0.07]"
+                >
+                  View Project
+                  <ArrowUpRight className="h-4 w-4" aria-hidden="true" />
+                </a>
+              )}
+              {project.githubUrl && (
+                <a
+                  href={project.githubUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-2 rounded-full border border-white/15 px-5 py-2.5 text-sm font-medium text-[var(--name-warm-white)] transition-colors duration-200 hover:border-[#7EAFFF]/40 hover:bg-[#7EAFFF]/[0.07]"
+                >
+                  GitHub
+                  <ArrowUpRight className="h-4 w-4" aria-hidden="true" />
+                </a>
+              )}
+            </div>
+          )}
         </div>
       </div>
-    </article>
+    </div>
   )
 }
 
 function Projects() {
+  const [selectedProject, setSelectedProject] = useState(null)
+  const lastTriggerRef = useRef(null)
+
+  function openProject(project, event) {
+    lastTriggerRef.current = event.currentTarget
+    setSelectedProject(project)
+  }
+
+  function closeProject() {
+    setSelectedProject(null)
+    lastTriggerRef.current?.focus()
+  }
+
   return (
     <section
       id="projects"
-      className="bg-[var(--navy-deep)] px-[clamp(1.5rem,6vw,5rem)] py-[clamp(3rem,8vw,6rem)] scroll-mt-[var(--nav-height)]"
+      className="relative overflow-hidden bg-[var(--navy-deep)] px-[clamp(1.5rem,6vw,5rem)] py-[clamp(4rem,10vw,9rem)] scroll-mt-[var(--nav-height)]"
     >
-      <div className="mx-auto flex max-w-[1360px] flex-col gap-14 sm:gap-16">
-        <h2 className="text-[clamp(2rem,3.6vw,2.75rem)] font-bold leading-tight tracking-tight text-[var(--name-warm-white)]">
-          Projects
-        </h2>
+      <div
+        className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_60%_45%_at_50%_0%,rgba(90,120,190,0.09),transparent_65%)]"
+        aria-hidden="true"
+      />
 
-        <div className="flex flex-col gap-12 sm:gap-14">
+      <div className="relative mx-auto flex max-w-[1300px] flex-col gap-14 sm:gap-16">
+        <div className="flex flex-col gap-8 sm:gap-10">
+          <div className="flex items-center gap-[0.85rem]">
+            <h2 className="text-[0.8rem] font-light uppercase tracking-[0.28em] text-[var(--body-slate)]">
+              Projects
+            </h2>
+            <span
+              className="h-px w-[170px] shrink-0 bg-gradient-to-r from-[var(--portrait-border)] to-transparent"
+              aria-hidden="true"
+            />
+          </div>
+
+          <p className="max-w-[750px] text-lg leading-relaxed text-[var(--body-slate)] sm:text-xl">
+            Here are some of the projects I&rsquo;ve worked on, ranging from web
+            applications to full-stack platforms and personal tools. Each
+            project helped me develop new skills, solve real problems, and
+            push my understanding of technology further.
+          </p>
+        </div>
+
+        <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 sm:gap-7 lg:grid-cols-3">
           {PROJECTS.map((project) => (
-            <ProjectEntry key={project.name} project={project} />
+            <ProjectCard
+              key={project.title}
+              project={project}
+              onOpen={(event) => openProject(project, event)}
+            />
           ))}
         </div>
       </div>
+
+      {selectedProject && (
+        <ProjectModal project={selectedProject} onRequestClose={closeProject} />
+      )}
     </section>
   )
 }

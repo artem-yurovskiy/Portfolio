@@ -1,21 +1,24 @@
-const SKILL_GROUPS = [
+import { Briefcase, Code2, Layers, Lightbulb, Wrench } from 'lucide-react'
+
+const SKILL_CATEGORIES = [
   {
+    id: 'languages',
     title: 'Languages',
-    items: ['Python', 'JavaScript', 'TypeScript', 'Java', 'C', 'C++', 'SQL', 'HTML/CSS'],
+    description: 'Core programming languages I use to build and ship software.',
+    icon: Code2,
+    accent: 'indigo',
+    span: 'lg:col-span-2',
+    skills: ['Python', 'JavaScript', 'TypeScript', 'Java', 'C', 'C++', 'SQL', 'HTML/CSS'],
   },
   {
-    title: 'Product & Business',
-    items: [
-      'Customer Discovery',
-      'Market Research',
-      'Financial Modeling',
-      'Competitive Analysis',
-      'Agile/Scrum',
-    ],
-  },
-  {
-    title: 'Frameworks & Tools',
-    items: [
+    id: 'frameworks',
+    title: 'Frameworks & Libraries',
+    description:
+      'Modern frameworks and libraries I use to build scalable, performant applications.',
+    icon: Layers,
+    accent: 'blue',
+    span: 'lg:col-span-2',
+    skills: [
       'React',
       'React Native',
       'Next.js',
@@ -27,12 +30,22 @@ const SKILL_GROUPS = [
       'Bootstrap',
       'JavaFX',
       'Java Swing',
+      'JUnit',
+    ],
+  },
+  {
+    id: 'tools',
+    title: 'Tools & Platforms',
+    description: 'Tools and platforms that help me build, deploy, and manage applications.',
+    icon: Wrench,
+    accent: 'cyan',
+    span: 'lg:col-span-2',
+    skills: [
       'Git/GitHub',
       'Supabase',
       'Stripe API',
       'Vercel',
       'Expo',
-      'JUnit',
       'Postgres',
       'VSCode',
       'IntelliJ',
@@ -44,8 +57,14 @@ const SKILL_GROUPS = [
     ],
   },
   {
-    title: 'Concepts & Practices',
-    items: [
+    id: 'concepts',
+    title: 'Concepts',
+    description:
+      'Core computer science and software engineering concepts I apply to solve real problems.',
+    icon: Lightbulb,
+    accent: 'violet',
+    span: 'lg:col-span-3',
+    skills: [
       'Socket Programming',
       'Multithreading',
       'RESTful APIs',
@@ -55,18 +74,94 @@ const SKILL_GROUPS = [
       'Web Accessibility (WCAG)',
     ],
   },
+  {
+    id: 'business',
+    title: 'Business & Product',
+    description:
+      'Business skills and product thinking that help me build solutions with real-world impact.',
+    icon: Briefcase,
+    accent: 'teal',
+    span: 'sm:col-span-2 lg:col-span-3',
+    skills: [
+      'Customer Discovery',
+      'Market Research',
+      'Financial Modeling',
+      'Competitive Analysis',
+      'Agile/Scrum',
+    ],
+  },
 ]
 
-function SkillGroup({ title, items }) {
+const ACCENTS = {
+  indigo: {
+    iconText: 'text-[#8b9dfb]',
+    iconBg: 'bg-[#8b9dfb]/10',
+    iconBorder: 'border-[#8b9dfb]/25',
+    hoverBorder: 'hover:border-[#8b9dfb]/35',
+    hoverGlow: 'hover:shadow-[0_0_60px_-30px_rgba(139,157,251,0.5)]',
+  },
+  blue: {
+    iconText: 'text-[#7EAFFF]',
+    iconBg: 'bg-[#7EAFFF]/10',
+    iconBorder: 'border-[#7EAFFF]/25',
+    hoverBorder: 'hover:border-[#7EAFFF]/35',
+    hoverGlow: 'hover:shadow-[0_0_60px_-30px_rgba(126,175,255,0.5)]',
+  },
+  cyan: {
+    iconText: 'text-[#5fc9f2]',
+    iconBg: 'bg-[#5fc9f2]/10',
+    iconBorder: 'border-[#5fc9f2]/25',
+    hoverBorder: 'hover:border-[#5fc9f2]/35',
+    hoverGlow: 'hover:shadow-[0_0_60px_-30px_rgba(95,201,242,0.5)]',
+  },
+  violet: {
+    iconText: 'text-[#c79bfa]',
+    iconBg: 'bg-[#c79bfa]/10',
+    iconBorder: 'border-[#c79bfa]/25',
+    hoverBorder: 'hover:border-[#c79bfa]/35',
+    hoverGlow: 'hover:shadow-[0_0_60px_-30px_rgba(199,155,250,0.5)]',
+  },
+  teal: {
+    iconText: 'text-[#4fd1c0]',
+    iconBg: 'bg-[#4fd1c0]/10',
+    iconBorder: 'border-[#4fd1c0]/25',
+    hoverBorder: 'hover:border-[#4fd1c0]/35',
+    hoverGlow: 'hover:shadow-[0_0_60px_-30px_rgba(79,209,192,0.45)]',
+  },
+}
+
+function SkillPill({ skill }) {
   return (
-    <div>
-      <h3 className="text-lg font-semibold text-[var(--name-warm-white)] sm:text-xl">{title}</h3>
-      <ul className="mt-5 flex flex-wrap gap-2.5">
-        {items.map((item) => (
-          <li key={item}>
-            <span className="inline-flex rounded-full border border-white/15 px-3.5 py-1.5 text-sm text-[var(--body-slate)]">
-              {item}
-            </span>
+    <span className="inline-flex rounded-full border border-[rgba(100,150,220,0.25)] px-3 py-[7px] text-[13px] font-medium text-[#A8B7D0] transition-colors duration-200 hover:border-[#7EAFFF]/40 hover:bg-[#7EAFFF]/[0.06] hover:text-[#F5F7FA]">
+      {skill}
+    </span>
+  )
+}
+
+function SkillCard({ category }) {
+  const a = ACCENTS[category.accent]
+  const Icon = category.icon
+
+  return (
+    <div
+      className={`group flex flex-col rounded-[16px] border border-[rgba(100,150,220,0.25)] bg-[#0D1624] p-8 transition-[transform,box-shadow,border-color] duration-300 hover:-translate-y-0.5 ${a.hoverBorder} ${a.hoverGlow} ${category.span}`}
+    >
+      <span
+        className={`flex h-[60px] w-[60px] shrink-0 items-center justify-center rounded-[12px] border ${a.iconBorder} ${a.iconBg}`}
+      >
+        <Icon className={`h-6 w-6 ${a.iconText}`} strokeWidth={1.5} aria-hidden="true" />
+      </span>
+
+      <h3 className="mt-5 text-xl font-bold text-[#F5F7FA]">{category.title}</h3>
+
+      <p className="mt-2.5 text-[0.95rem] leading-relaxed text-[#A8B7D0]">
+        {category.description}
+      </p>
+
+      <ul className="mt-6 flex flex-wrap gap-2">
+        {category.skills.map((skill) => (
+          <li key={skill}>
+            <SkillPill skill={skill} />
           </li>
         ))}
       </ul>
@@ -78,16 +173,34 @@ function Skills() {
   return (
     <section
       id="skills"
-      className="bg-[var(--navy-mid)] px-[clamp(1.5rem,6vw,5rem)] py-[clamp(3rem,8vw,6rem)] scroll-mt-[var(--nav-height)]"
+      className="relative overflow-hidden bg-[var(--navy-deep)] px-[clamp(1.5rem,6vw,5rem)] py-[clamp(4rem,10vw,9rem)] scroll-mt-[var(--nav-height)]"
     >
-      <div className="mx-auto flex max-w-[1360px] flex-col gap-14 sm:gap-16">
-        <h2 className="text-[clamp(2rem,3.6vw,2.75rem)] font-bold leading-tight tracking-tight text-[var(--name-warm-white)]">
-          Skills
-        </h2>
+      <div
+        className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_60%_45%_at_50%_0%,rgba(90,120,190,0.09),transparent_65%)]"
+        aria-hidden="true"
+      />
 
-        <div className="grid grid-cols-1 gap-x-16 gap-y-12 border-t border-white/10 pt-10 sm:pt-12 md:grid-cols-2">
-          {SKILL_GROUPS.map((group) => (
-            <SkillGroup key={group.title} title={group.title} items={group.items} />
+      <div className="relative mx-auto flex max-w-[1300px] flex-col gap-14 sm:gap-16">
+        <div className="flex flex-col gap-8 sm:gap-10">
+          <div className="flex items-center gap-[0.85rem]">
+            <h2 className="text-[0.8rem] font-light uppercase tracking-[0.28em] text-[var(--body-slate)]">
+              Skills
+            </h2>
+            <span
+              className="h-px w-[170px] shrink-0 bg-gradient-to-r from-[var(--portrait-border)] to-transparent"
+              aria-hidden="true"
+            />
+          </div>
+
+          <p className="max-w-[650px] text-lg leading-relaxed text-[var(--body-slate)] sm:text-xl">
+            A combination of technical expertise and business acumen, built
+            through hands-on experience and continuous learning.
+          </p>
+        </div>
+
+        <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 sm:gap-7 lg:grid-cols-6">
+          {SKILL_CATEGORIES.map((category) => (
+            <SkillCard key={category.id} category={category} />
           ))}
         </div>
       </div>

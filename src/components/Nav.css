@@ -10,6 +10,13 @@
   backdrop-filter: blur(14px);
   -webkit-backdrop-filter: blur(14px);
   border-bottom: 1px solid rgba(148, 163, 184, 0.14);
+  opacity: 1;
+  transition: opacity 0.2s ease;
+}
+
+body.modal-open .nav {
+  opacity: 0;
+  pointer-events: none;
 }
 
 .nav__inner {
@@ -210,6 +217,7 @@
 }
 
 @media (prefers-reduced-motion: reduce) {
+  .nav,
   .nav__toggle-bar,
   .nav__toggle-bar::before,
   .nav__toggle-bar::after,

@@ -1,29 +1,68 @@
+const ACTIVITIES = [
+  {
+    id: 'ftc-robotics',
+    role: 'Lead Programmer',
+    organization: 'FIRST Tech Challenge Robotics Club',
+    startDate: 'Sep 2020',
+    endDate: 'Apr 2023',
+    description:
+      'Led a team of 6 programmers building real-time robot control systems, winning 2nd Place Control Award at NH States.',
+  },
+]
+
+function ActivityEntry({ activity }) {
+  return (
+    <div className="flex flex-col gap-3.5">
+      <div className="flex flex-col gap-3 sm:flex-row sm:items-start sm:justify-between sm:gap-6">
+        <div className="flex items-start gap-4">
+          <span
+            className="mt-0.5 h-9 w-[2px] shrink-0 rounded-full bg-[#7EAFFF] sm:h-10"
+            aria-hidden="true"
+          />
+          <div>
+            <p className="text-xl font-semibold leading-snug text-[var(--name-warm-white)]">
+              {activity.role}
+            </p>
+            <p className="mt-1 text-base leading-snug text-[var(--body-slate)]">
+              {activity.organization}
+            </p>
+          </div>
+        </div>
+
+        <p className="pl-[18px] text-sm text-[var(--body-slate)] sm:pl-0 sm:pt-1 sm:text-right">
+          {activity.startDate} – {activity.endDate}
+        </p>
+      </div>
+
+      <p className="max-w-[820px] pl-[18px] text-[15px] leading-relaxed text-[var(--body-slate)] sm:text-base">
+        {activity.description}
+      </p>
+    </div>
+  )
+}
+
 function Leadership() {
   return (
     <section
       id="leadership"
-      className="bg-[var(--navy-deep)] px-[clamp(1.5rem,6vw,5rem)] py-[clamp(2.5rem,6vw,4rem)] scroll-mt-[var(--nav-height)]"
+      className="bg-[var(--navy-mid)] px-[clamp(1.5rem,6vw,5rem)] pb-20 pt-[clamp(5rem,10vw,6.25rem)] scroll-mt-[var(--nav-height)]"
     >
-      <div className="mx-auto flex max-w-[1360px] flex-col gap-6 sm:gap-7">
-        <h2 className="text-xl font-semibold text-[var(--name-warm-white)] sm:text-2xl">
-          Leadership &amp; Activities
-        </h2>
-
-        <div className="flex flex-col gap-2 border-t border-white/10 pt-6 sm:flex-row sm:items-baseline sm:justify-between sm:gap-8">
-          <p className="text-base font-semibold text-[var(--name-warm-white)]">
-            Lead Programmer
-          </p>
-          <div className="flex flex-col text-sm text-[var(--body-slate)] sm:items-end sm:text-right">
-            <p>FIRST Tech Challenge Robotics Club — Team #12758, Derryfield Binary Bots</p>
-            <p>Sep 2020 – Apr 2023</p>
-          </div>
+      <div className="mx-auto flex max-w-[1360px] flex-col gap-7">
+        <div className="flex items-center gap-[0.85rem]">
+          <span className="text-[0.8rem] font-light uppercase tracking-[0.28em] text-[var(--body-slate)]">
+            Leadership
+          </span>
+          <span
+            className="h-px w-[170px] shrink-0 bg-gradient-to-r from-[var(--portrait-border)] to-transparent"
+            aria-hidden="true"
+          />
         </div>
 
-        <p className="max-w-[68ch] text-sm leading-relaxed text-[var(--body-slate)]">
-          Led a team of 6 programmers designing real-time control systems for
-          competitive robotics; awarded 2nd Place Control Award at the NH
-          State Championship for autonomous software performance.
-        </p>
+        <div className="flex flex-col gap-8">
+          {ACTIVITIES.map((activity) => (
+            <ActivityEntry key={activity.id} activity={activity} />
+          ))}
+        </div>
       </div>
     </section>
   )

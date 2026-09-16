@@ -30,7 +30,7 @@ Built as a React + Vite single-page site (already scaffolded). No backend, CMS, 
 
 ## Evidence on Hand
 
-- **Education:** B.S. in Computer Science, Minor in Management, Certificate in Entrepreneurship and Innovation, Purdue University, plus a confirmed relevant-coursework list (CS and Business/Entrepreneurship tracks) — shipped in the Education section.
+- **Education:** B.S. in Computer Science, Minor in Management, Certificate in Entrepreneurship and Innovation, Purdue University, GPA 3.53, Dean's List and Semester Honors, plus a confirmed relevant-coursework list (CS and Business/Entrepreneurship tracks) — shipped in the Education section.
 - **Experience:** Full-Stack Developer, [Verbs & Vibes](https://verbsandvibes.vercel.app/) (language & culture club, Manchester, NH), May 2026 – Present — a production full-stack app (public site, e-commerce/subscription payments via Stripe, booking system, internal admin dashboard). Scale facts on hand: ~14,000 LOC, 98 React components, 28 routes, 8 versioned DB migrations. Stack: Next.js 16, React 19, Supabase/PostgreSQL, Stripe, Tailwind CSS, Node.js, Server Actions. Shipped in the Experience section, which links out to the live site.
 - No resume or additional project write-ups have been provided yet. Placeholder/sample content stands in elsewhere until real evidence is supplied — flag it as placeholder rather than presenting it as fact.
 

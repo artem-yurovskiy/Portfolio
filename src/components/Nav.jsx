@@ -1,7 +1,6 @@
 import { useEffect, useRef, useState } from 'react'
 import './Nav.css'
 
-// Add a new { href: '#section-id', label: 'Label' } entry here as new sections ship.
 const LINKS = [
   { href: '#education', label: 'Education' },
   { href: '#experience', label: 'Experience' },
@@ -13,7 +12,6 @@ const LINKS = [
 ]
 
 function scrollToHash(event, href) {
-  // Let modified/non-primary clicks behave normally (new tab, etc.).
   if (event.button !== 0 || event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) {
     return
   }
@@ -22,9 +20,6 @@ function scrollToHash(event, href) {
   if (!target) return
 
   event.preventDefault()
-  // No explicit `behavior` here: it lets the element inherit the
-  // `scroll-behavior` set on `:root`, which already backs off to
-  // `auto` under prefers-reduced-motion.
   target.scrollIntoView()
 }
 
@@ -52,14 +47,9 @@ function Nav() {
           }
         })
 
-        // Multiple sections can straddle the band at once; the one that
-        // appears earliest in page order is the one the visitor is "in".
         const current = sections.find((section) => visibleSections.has(section.id))
         setActiveHref(current ? `#${current.id}` : null)
       },
-      // A thin horizontal band just under the fixed nav: a section counts as
-      // "current" only once its top has cleared the bar and before it's
-      // scrolled past the upper third of the viewport.
       { rootMargin: `-${navHeight}px 0px -66% 0px`, threshold: 0 },
     )
 

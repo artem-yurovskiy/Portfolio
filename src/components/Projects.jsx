@@ -163,7 +163,6 @@ function ProjectModal({ project, onRequestClose }) {
       document.body.style.overflow = previousOverflow
       if (previouslyFocused instanceof HTMLElement) previouslyFocused.focus()
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
   const hasLinks = Boolean(project.liveUrl || project.githubUrl)

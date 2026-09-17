@@ -1,4 +1,4 @@
-import { Award, Briefcase, Lightbulb } from 'lucide-react'
+import { Award, Briefcase, Calendar, Lightbulb } from 'lucide-react'
 
 const TECHNICAL_COURSES = [
   'Software Engineering',
@@ -47,7 +47,7 @@ function CourseworkPanel({ title, description, courses, accent, className = '' }
 
   return (
     <div
-      className={`w-full rounded-[20px] border ${a.border} bg-[var(--navy-panel)] p-8 transition-[transform,box-shadow,border-color] duration-300 ${a.glow} hover:-translate-y-0.5 ${a.hoverBorder} ${a.hoverGlow} sm:p-10 ${className}`}
+      className={`w-full rounded-[20px] border ${a.border} bg-[var(--navy-panel)] p-8 transition-[transform,box-shadow,border-color] duration-300 ${a.glow} hover:-translate-y-1 ${a.hoverBorder} ${a.hoverGlow} sm:p-10 ${className}`}
     >
       <h4 className={`text-sm font-medium uppercase tracking-[0.3em] ${a.text}`}>
         {title}
@@ -83,29 +83,25 @@ function Education() {
 
       <div className="relative mx-auto flex max-w-[1360px] flex-col gap-14 sm:gap-16">
         <div className="flex flex-col gap-8 sm:gap-10">
-          <div className="flex items-center gap-[0.85rem]">
-            <span className="text-[0.8rem] font-light uppercase tracking-[0.28em] text-[var(--body-slate)]">
+          <div className="flex flex-col gap-6 sm:gap-8">
+            <h2 className="text-[clamp(1.85rem,3.5vw,2.5rem)] font-bold leading-tight tracking-tight text-[var(--name-warm-white)]">
               Education
-            </span>
-            <span
-              className="h-px w-40 shrink-0 bg-gradient-to-r from-[var(--portrait-border)] to-transparent"
-              aria-hidden="true"
-            />
-          </div>
-
-          <div className="flex items-center gap-4 sm:gap-5">
-            <img
-              src="/Purdue_Logo.png"
-              alt=""
-              aria-hidden="true"
-              className="h-9 w-auto opacity-90 sm:h-11"
-            />
-            <h2 className="text-[clamp(2.5rem,5.5vw,4rem)] font-bold leading-tight tracking-tight text-[var(--name-warm-white)]">
-              Purdue University
             </h2>
+
+            <div className="flex items-center gap-3 sm:gap-4">
+              <img
+                src="/Purdue_Logo.png"
+                alt=""
+                aria-hidden="true"
+                className="h-7 w-auto opacity-90 sm:h-9"
+              />
+              <h3 className="text-[clamp(1.5rem,3vw,2rem)] font-bold leading-tight tracking-tight text-[var(--name-warm-white)]">
+                Purdue University
+              </h3>
+            </div>
           </div>
 
-          <div className="flex flex-col gap-5 border-t border-white/10 pt-8 sm:flex-row sm:items-start sm:justify-between sm:gap-10">
+          <div className="flex flex-col gap-5 border-t border-white/10 pt-8 xl:flex-row xl:items-start xl:justify-between xl:gap-10">
             <div className="flex flex-col gap-2">
               <p className="text-[1.5rem] font-bold leading-tight tracking-[-0.01em] text-[var(--name-warm-white)] sm:text-[1.75rem]">
                 B.S. in Computer Science
@@ -124,8 +120,16 @@ function Education() {
                   Dean&rsquo;s List, Semester Honors
                 </span>
               </p>
+              <span className="mt-1 inline-flex items-center gap-2 text-base font-medium text-[var(--body-slate)]">
+                <Calendar
+                  className="h-4 w-4 text-[var(--portrait-icon)]"
+                  strokeWidth={1.5}
+                  aria-hidden="true"
+                />
+                Expected Graduation: May 2027
+              </span>
             </div>
-            <div className="flex flex-col gap-3 text-base font-medium text-[var(--body-slate)] sm:flex-row sm:items-center sm:gap-6">
+            <div className="flex flex-col gap-2.5 text-base font-medium text-[var(--body-slate)]">
               <span className="inline-flex items-center gap-2">
                 <Briefcase
                   className="h-4 w-4 text-[var(--portrait-icon)]"
@@ -155,7 +159,7 @@ function Education() {
             className="md:w-[58%]"
           />
           <CourseworkPanel
-            title={'Business & Entrepreneurship'}
+            title="Business & Entrepreneurship"
             description="Business and entrepreneurial coursework complementing my technical background."
             courses={BUSINESS_COURSES}
             accent="business"

@@ -199,16 +199,10 @@ function Certifications() {
       />
 
       <div className="relative mx-auto flex max-w-[1300px] flex-col gap-14 sm:gap-16">
-        <div className="flex flex-col gap-8 sm:gap-10">
-          <div className="flex items-center gap-[0.85rem]">
-            <h2 className="text-[0.8rem] font-light uppercase tracking-[0.28em] text-[var(--body-slate)]">
-              Certifications
-            </h2>
-            <span
-              className="h-px w-[170px] shrink-0 bg-gradient-to-r from-[var(--portrait-border)] to-transparent"
-              aria-hidden="true"
-            />
-          </div>
+        <div className="flex flex-col gap-4 sm:gap-5">
+          <h2 className="text-[clamp(1.85rem,3.5vw,2.5rem)] font-bold leading-tight tracking-tight text-[var(--name-warm-white)]">
+            Certifications
+          </h2>
 
           <p className="max-w-[650px] text-lg leading-relaxed text-[var(--body-slate)] sm:text-xl">
             Professional certifications and technical training that complement

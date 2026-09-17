@@ -86,16 +86,6 @@ function Contact() {
 
       <div className="relative mx-auto flex max-w-[850px] flex-col items-center gap-8 text-center sm:gap-10">
         <div className="flex flex-col items-center gap-5">
-          <div className="flex items-center justify-center gap-[0.85rem]">
-            <span className="text-[0.8rem] font-light uppercase tracking-[0.28em] text-[var(--body-slate)]">
-              Contact
-            </span>
-            <span
-              className="h-px w-[140px] shrink-0 bg-gradient-to-r from-[var(--portrait-border)] to-transparent"
-              aria-hidden="true"
-            />
-          </div>
-
           <h2 className="text-[clamp(2.25rem,6vw,4rem)] font-bold leading-tight tracking-tight text-[var(--name-warm-white)]">
             Let&rsquo;s Connect
           </h2>

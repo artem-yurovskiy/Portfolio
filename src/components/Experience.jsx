@@ -10,11 +10,15 @@ const EXPERIENCES = [
     startDate: 'May 2026',
     endDate: 'Present',
     description:
-      'Designed and built a production full-stack web application end to end for a language and culture club startup, spanning a public site, e-commerce and subscription payments, a booking system, and an internal admin dashboard.',
+      'Designed and built a production full-stack web application for a language and culture club startup, spanning a public marketing site, e-commerce and subscription payments, a booking system, and an internal admin dashboard.',
     highlights: [
       {
         text: 'Built with Next.js and the App Router, covering marketing pages, class registration, and event ticketing.',
         emphasize: ['Next.js', 'App Router'],
+      },
+      {
+        text: 'Worked directly with the business owner to gather requirements and translate day-to-day operational needs (class scheduling, membership pricing, event capacity) into functional features.',
+        emphasize: ['business owner', 'functional features'],
       },
       {
         text: 'Designed a unified Stripe checkout handling 4 product types, including course enrollment, gift cards, event tickets, and recurring memberships. Every order flows through a signed webhook handler with idempotent, atomic fulfillment to prevent duplicate charges.',
@@ -35,14 +39,11 @@ const EXPERIENCES = [
     ],
     technologies: [
       'Next.js',
-      'React',
       'JavaScript',
-      'PostgreSQL',
-      'Supabase',
+      'Supabase/PostgreSQL',
       'Stripe API',
       'Tailwind CSS',
       'Node.js',
-      'Server Actions',
     ],
   },
 ]
@@ -96,8 +97,6 @@ function ExperienceCard({ experience }) {
     <div className="group mx-auto flex w-full max-w-[1300px] flex-col rounded-[18px] border border-[rgba(100,150,220,0.25)] bg-[#0D1624] p-7 shadow-[0_0_80px_-36px_rgba(126,175,255,0.3)] transition-[transform,box-shadow,border-color] duration-[250ms] hover:-translate-y-0.5 hover:border-[rgba(126,175,255,0.4)] hover:shadow-[0_0_90px_-30px_rgba(126,175,255,0.4)] sm:p-9">
       <div className="flex flex-col gap-10 md:flex-row md:items-stretch md:gap-0">
         <div className="flex flex-col gap-8 md:w-[58%] md:pr-10">
-          <SitePreview experience={experience} />
-
           <div className="flex flex-col gap-2">
             <h3 className="text-[1.85rem] font-bold leading-tight text-[#F5F7FA] sm:text-[2.15rem]">
               {experience.role}
@@ -122,6 +121,8 @@ function ExperienceCard({ experience }) {
           <p className="max-w-[650px] text-lg leading-relaxed text-[#A8B7D0]">
             {experience.description}
           </p>
+
+          <SitePreview experience={experience} />
         </div>
 
         <div
@@ -180,15 +181,9 @@ function Experience() {
       />
 
       <div className="relative mx-auto flex max-w-[1300px] flex-col gap-10 sm:gap-12">
-        <div className="flex items-center gap-[0.85rem]">
-          <h2 className="text-[0.8rem] font-light uppercase tracking-[0.28em] text-[var(--body-slate)]">
-            Experience
-          </h2>
-          <span
-            className="h-px w-[170px] shrink-0 bg-gradient-to-r from-[var(--portrait-border)] to-transparent"
-            aria-hidden="true"
-          />
-        </div>
+        <h2 className="text-[clamp(1.85rem,3.5vw,2.5rem)] font-bold leading-tight tracking-tight text-[var(--name-warm-white)]">
+          Experience
+        </h2>
 
         {EXPERIENCES.map((experience) => (
           <ExperienceCard key={experience.company} experience={experience} />

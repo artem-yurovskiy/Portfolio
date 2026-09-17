@@ -3,16 +3,16 @@ export const PROJECTS = [
     title: 'Forge',
     image: '/projects/forge.png',
     shortDescription:
-      'Forge is a full-stack mobile fitness and social app I helped build as part of a 6-person Agile team across 3 sprints. It combines workout tracking, diet logging, social feeds, and AI-assisted fitness guidance.',
+      'A mobile app that combines workout tracking, diet/macro logging, social features, and AI-based fitness guidance into a single platform.',
     description:
-      'Forge is a full-stack mobile fitness and social app I helped build as part of a 6-person Agile team across 3 sprints. It combines workout tracking, diet logging, social feeds, and AI-assisted fitness guidance.',
+      'A mobile app that combines workout tracking, diet/macro logging, social features, and AI-based fitness guidance into a single platform.',
     highlights: [
-      'Built 6 features end to end, including workout scheduling, accessibility settings, push notification scheduling, a friends activity feed, and AI-powered meal recommendations, owning the frontend, backend, and tests for each.',
-      'Wired the OpenAI API into a FastAPI endpoint to generate structured, personalized meal recommendations, then integrated the feature into the React Native frontend.',
-      'Built push notification scheduling with Expo Notifications, letting users set reminders tied to their planned workouts and meals.',
-      "Contributed to the team's design document and helped define 59 user stories in the product backlog, shaping the app's core features.",
+      'Worked within a 6-person Agile team across 3 sprints to build Forge.',
+      "Developed the team's core Agile artifacts, including a project charter, a design document mapping out the app's architecture, and a backlog of 59 user stories that guided sprint planning across development.",
+      'Implemented the app’s social layer, including a friends and gym activity feed and real-time in-app messaging, using React Native/TypeScript for the interface and FastAPI with SQLAlchemy for the backend logic and data persistence.',
+      'Built core app usability features, including accessibility settings, scheduled workout/meal notifications, an exercise help system, and a recurring workout calendar.',
     ],
-    technologies: ['React Native', 'TypeScript', 'FastAPI', 'SQLAlchemy', 'OpenAI API'],
+    technologies: ['React Native', 'TypeScript', 'FastAPI', 'SQLAlchemy', 'OpenAI API', 'Pinecone'],
     liveUrl: '',
     githubUrl: 'https://github.com/artem-yurovskiy/Forge',
   },
@@ -20,14 +20,14 @@ export const PROJECTS = [
     title: 'Online Marketplace',
     image: '/project_placeholder.webp',
     shortDescription:
-      'Online Marketplace is a Java client-server application I built to support concurrent buyers and sellers, handling store browsing, shopping carts, and purchase history through a custom multithreaded backend.',
+      'A Java-based e-commerce marketplace, for sellers to list and manage products and for buyers to browse stores and place orders.',
     description:
-      'Online Marketplace is a Java client-server application I built to support concurrent buyers and sellers, handling store browsing, shopping carts, and purchase history through a custom multithreaded backend.',
+      'A Java-based e-commerce marketplace, for sellers to list and manage products and for buyers to browse stores and place orders.',
     highlights: [
       'Designed a Swing GUI for browsing stores, managing carts, and switching between buyer and seller roles.',
       'Built a multithreaded socket server in Java, running each client connection on its own dedicated thread to support real concurrent sessions.',
       'Validated User, Seller, Customer, Product, and Store logic with JUnit tests under 1-second timeouts.',
-      'Implemented persistent storage via object serialization, saving cart and purchase data across sessions without a database.',
+      'Implemented persistent storage via object serialization, saving cart and purchase data across sessions.',
     ],
     technologies: ['Java', 'Swing', 'Socket Programming', 'Multithreading', 'JUnit'],
     liveUrl: '',
@@ -37,11 +37,11 @@ export const PROJECTS = [
     title: 'Custom Memory Allocator',
     image: '/project_placeholder.webp',
     shortDescription:
-      "Custom Memory Allocator is a low-level systems project where I implemented my own heap allocator in C, managing memory manually instead of relying on the standard library's malloc and free.",
+      "A custom heap allocator built in C, managing memory manually instead of relying on the standard library's malloc and free.",
     description:
-      "Custom Memory Allocator is a low-level systems project where I implemented my own heap allocator in C, managing memory manually instead of relying on the standard library's malloc and free.",
+      "A custom heap allocator built in C, managing memory manually instead of relying on the standard library's malloc and free.",
     highlights: [
-      'Implemented a custom heap allocator in C using low-level pointer manipulation and boundary tags to track allocated and free memory blocks.',
+      'Implemented the allocator using low-level pointer manipulation and boundary tags to track allocated and free memory blocks.',
       'Designed free list management to track available memory blocks and support efficient allocation and deallocation.',
       'Built block splitting logic to divide larger free blocks into smaller ones, reducing wasted space on small allocations.',
       'Implemented immediate coalescing to merge adjacent free blocks back together, minimizing fragmentation and improving memory reuse over time.',
@@ -54,9 +54,9 @@ export const PROJECTS = [
     title: 'Wordle Unlimited',
     image: '/project_placeholder.webp',
     shortDescription:
-      'Wordle Unlimited is a JavaFX desktop clone of the NYT word game, where players get six guesses to find a five-letter word, complete with animated feedback and a statistics dashboard tracking performance over time.',
+      'A JavaFX desktop clone of Wordle — the popular NYT word game where users have six tries to guess a hidden five-letter word.',
     description:
-      'Wordle Unlimited is a JavaFX desktop clone of the NYT word game, where players get six guesses to find a five-letter word, complete with animated feedback and a statistics dashboard tracking performance over time.',
+      'A JavaFX desktop clone of Wordle — the popular NYT word game where users have six tries to guess a hidden five-letter word.',
     highlights: [
       'Built the core game logic in Java, validating guesses letter by letter and generating a new target word each round.',
       'Implemented custom tile-flip animations in JavaFX to visually reveal correct, misplaced, and incorrect letters after each guess.',
@@ -65,5 +65,19 @@ export const PROJECTS = [
     technologies: ['Java', 'JavaFX', 'Maven'],
     liveUrl: '',
     githubUrl: 'https://github.com/artem-yurovskiy/Wordle-Unlimited',
+  },
+  {
+    title: 'This Website!',
+    image: '/project_placeholder.webp',
+    shortDescription: 'You are looking at it right now.',
+    description: 'You are looking at it right now.',
+    highlights: [
+      'Built as a fully component-based React app, with each section, including Experience, Projects, Skills, and Education, structured as its own independent, reusable component.',
+      'Designed using Tailwind CSS.',
+      'Deployed on Vercel.',
+    ],
+    technologies: ['React', 'Tailwind CSS', 'Vercel'],
+    liveUrl: '',
+    githubUrl: '',
   },
 ]

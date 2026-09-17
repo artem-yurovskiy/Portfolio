@@ -8,7 +8,7 @@ const SKILL_CATEGORIES = [
     icon: Code2,
     accent: 'indigo',
     span: 'lg:col-span-2',
-    skills: ['Python', 'JavaScript', 'TypeScript', 'Java', 'C', 'C++', 'SQL', 'HTML/CSS'],
+    skills: ['Java', 'Python', 'JavaScript', 'TypeScript', 'C', 'HTML/CSS', 'SQL', 'C++'],
   },
   {
     id: 'frameworks',
@@ -44,9 +44,10 @@ const SKILL_CATEGORIES = [
       'Git/GitHub',
       'Supabase',
       'Stripe API',
+      'OpenAI API',
+      'Agile/Scrum',
       'Vercel',
       'Expo',
-      'Postgres',
       'VSCode',
       'IntelliJ',
       'Eclipse',
@@ -65,12 +66,12 @@ const SKILL_CATEGORIES = [
     accent: 'violet',
     span: 'lg:col-span-3',
     skills: [
-      'Socket Programming',
-      'Multithreading',
-      'RESTful APIs',
       'Full-Stack Development',
+      'RESTful APIs',
       'Database Schema Design',
       'Payment Systems Integration',
+      'Multithreading',
+      'Socket Programming',
       'Web Accessibility (WCAG)',
     ],
   },
@@ -87,7 +88,6 @@ const SKILL_CATEGORIES = [
       'Market Research',
       'Financial Modeling',
       'Competitive Analysis',
-      'Agile/Scrum',
     ],
   },
 ]
@@ -181,19 +181,13 @@ function Skills() {
       />
 
       <div className="relative mx-auto flex max-w-[1300px] flex-col gap-14 sm:gap-16">
-        <div className="flex flex-col gap-8 sm:gap-10">
-          <div className="flex items-center gap-[0.85rem]">
-            <h2 className="text-[0.8rem] font-light uppercase tracking-[0.28em] text-[var(--body-slate)]">
-              Skills
-            </h2>
-            <span
-              className="h-px w-[170px] shrink-0 bg-gradient-to-r from-[var(--portrait-border)] to-transparent"
-              aria-hidden="true"
-            />
-          </div>
+        <div className="flex flex-col gap-4 sm:gap-5">
+          <h2 className="text-[clamp(1.85rem,3.5vw,2.5rem)] font-bold leading-tight tracking-tight text-[var(--name-warm-white)]">
+            Skills
+          </h2>
 
           <p className="max-w-[650px] text-lg leading-relaxed text-[var(--body-slate)] sm:text-xl">
-            A combination of technical expertise and business acumen, built
+            A combination of technical expertise and business thinking, built
             through hands-on experience and continuous learning.
           </p>
         </div>

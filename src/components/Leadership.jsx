@@ -48,15 +48,9 @@ function Leadership() {
       className="bg-[var(--navy-mid)] px-[clamp(1.5rem,6vw,5rem)] pb-20 pt-[clamp(5rem,10vw,6.25rem)] scroll-mt-[var(--nav-height)]"
     >
       <div className="mx-auto flex max-w-[1360px] flex-col gap-7">
-        <div className="flex items-center gap-[0.85rem]">
-          <span className="text-[0.8rem] font-light uppercase tracking-[0.28em] text-[var(--body-slate)]">
-            Leadership
-          </span>
-          <span
-            className="h-px w-[170px] shrink-0 bg-gradient-to-r from-[var(--portrait-border)] to-transparent"
-            aria-hidden="true"
-          />
-        </div>
+        <h2 className="text-[clamp(1.85rem,3.5vw,2.5rem)] font-bold leading-tight tracking-tight text-[var(--name-warm-white)]">
+          Leadership
+        </h2>
 
         <div className="flex flex-col gap-8">
           {ACTIVITIES.map((activity) => (

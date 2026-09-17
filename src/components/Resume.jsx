@@ -103,15 +103,9 @@ function Resume() {
       className="bg-[var(--navy-mid)] px-[clamp(1.5rem,6vw,5rem)] py-[clamp(3rem,8vw,6rem)] scroll-mt-[var(--nav-height)]"
     >
       <div className="mx-auto flex w-full max-w-[900px] flex-col items-center gap-8 text-center sm:gap-10">
-        <div className="flex items-center justify-center gap-[0.85rem]">
-          <h2 className="text-[0.8rem] font-light uppercase tracking-[0.28em] text-[var(--body-slate)]">
-            Resume
-          </h2>
-          <span
-            className="h-px w-[140px] shrink-0 bg-gradient-to-r from-[var(--portrait-border)] to-transparent"
-            aria-hidden="true"
-          />
-        </div>
+        <h2 className="text-[clamp(1.85rem,3.5vw,2.5rem)] font-bold leading-tight tracking-tight text-[var(--name-warm-white)]">
+          Resume
+        </h2>
 
         <p className="max-w-[560px] text-base leading-relaxed text-[var(--body-slate)] sm:text-lg">
           I tailor my resume depending on the type of role — pick whichever

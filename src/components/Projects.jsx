@@ -4,21 +4,6 @@ import { PROJECTS } from '../data/projects'
 
 const MODAL_TRANSITION_MS = 250
 
-function ProjectScreenshot({ src, alt, containerClassName = '', imgClassName = '' }) {
-  return (
-    <div
-      className={`flex items-center justify-center overflow-hidden bg-[#080F1C] ${containerClassName}`}
-    >
-      <img
-        src={src}
-        alt={alt}
-        loading="lazy"
-        className={`h-auto w-auto max-h-full max-w-full object-contain ${imgClassName}`}
-      />
-    </div>
-  )
-}
-
 function TechTags({ technologies, limit }) {
   const list = limit ? technologies.slice(0, limit) : technologies
 
@@ -40,32 +25,31 @@ function ProjectCard({ project, onOpen }) {
     <button
       type="button"
       onClick={onOpen}
-      className="group flex flex-col overflow-hidden rounded-[18px] border border-white/10 bg-[var(--navy-panel)] text-left transition-[transform,box-shadow,border-color] duration-300 hover:-translate-y-1 hover:border-[#7EAFFF]/35 hover:shadow-[0_0_60px_-28px_rgba(126,175,255,0.5)] focus-visible:outline focus-visible:outline-2 focus-visible:outline-[#7EAFFF] focus-visible:outline-offset-4"
+      className="group flex flex-col rounded-[18px] border border-white/10 bg-[var(--navy-panel)] p-7 text-left transition-[transform,box-shadow,border-color] duration-300 hover:-translate-y-1 hover:border-[#7EAFFF]/35 hover:shadow-[0_0_60px_-28px_rgba(126,175,255,0.5)] focus-visible:outline focus-visible:outline-2 focus-visible:outline-[#7EAFFF] focus-visible:outline-offset-4 sm:p-8"
     >
-      <ProjectScreenshot
-        src={project.image}
-        alt={`${project.title} project screenshot`}
-        containerClassName="h-[200px] w-full shrink-0 border-b border-white/10 p-6"
-        imgClassName="rounded-[8px] transition-transform duration-300 group-hover:scale-[1.02]"
-      />
+      <div className="flex items-start justify-between gap-4">
+        <h3 className="text-xl font-bold text-[var(--name-warm-white)] sm:text-[1.375rem]">
+          {project.title}
+        </h3>
+        <ArrowRight
+          className="mt-1.5 h-5 w-5 shrink-0 text-[#7EAFFF] transition-transform duration-300 group-hover:translate-x-1"
+          aria-hidden="true"
+        />
+      </div>
 
-      <div className="flex flex-1 flex-col gap-3 p-7">
-        <div className="flex items-start justify-between gap-4">
-          <h3 className="text-xl font-bold text-[var(--name-warm-white)] sm:text-[1.375rem]">
-            {project.title}
-          </h3>
-          <ArrowRight
-            className="mt-1.5 h-5 w-5 shrink-0 text-[#7EAFFF] transition-transform duration-300 group-hover:translate-x-1"
-            aria-hidden="true"
+      <p className="mt-4 flex-1 text-[0.95rem] leading-relaxed text-[var(--body-slate)]">
+        {project.shortDescription}
+      </p>
+
+      <div className="mt-7 border-t border-white/10 pt-5">
+        <h4 className="text-[0.7rem] font-medium uppercase tracking-[0.25em] text-[var(--body-slate)]">
+          Built With
+        </h4>
+        <div className="mt-3">
+          <TechTags
+            technologies={project.technologies}
+            limit={project.title === 'Forge' ? undefined : 4}
           />
-        </div>
-
-        <p className="text-[0.95rem] leading-relaxed text-[var(--body-slate)]">
-          {project.shortDescription}
-        </p>
-
-        <div className="mt-auto pt-4">
-          <TechTags technologies={project.technologies} limit={3} />
         </div>
       </div>
     </button>
@@ -177,14 +161,7 @@ function ProjectModal({ project, onRequestClose }) {
         </div>
 
         <div className="overflow-y-auto p-5 sm:p-8">
-          <ProjectScreenshot
-            src={project.image}
-            alt={`${project.title} project screenshot`}
-            containerClassName="w-full rounded-[14px] border border-white/10 p-6 sm:p-10"
-            imgClassName="max-h-[350px] rounded-[8px] sm:max-h-[450px]"
-          />
-
-          <p className="mt-8 text-[1.0625rem] leading-relaxed text-[var(--body-slate)] sm:text-lg">
+          <p className="text-[1.0625rem] leading-relaxed text-[var(--body-slate)] sm:text-lg">
             {project.description}
           </p>
 
@@ -273,22 +250,17 @@ function Projects() {
       />
 
       <div className="relative mx-auto flex max-w-[1300px] flex-col gap-14 sm:gap-16">
-        <div className="flex flex-col gap-8 sm:gap-10">
-          <div className="flex items-center gap-[0.85rem]">
-            <h2 className="text-[0.8rem] font-light uppercase tracking-[0.28em] text-[var(--body-slate)]">
-              Projects
-            </h2>
-            <span
-              className="h-px w-[170px] shrink-0 bg-gradient-to-r from-[var(--portrait-border)] to-transparent"
-              aria-hidden="true"
-            />
-          </div>
+        <div className="flex flex-col gap-4 sm:gap-5">
+          <h2 className="text-[clamp(1.85rem,3.5vw,2.5rem)] font-bold leading-tight tracking-tight text-[var(--name-warm-white)]">
+            Projects
+          </h2>
 
           <p className="max-w-[750px] text-lg leading-relaxed text-[var(--body-slate)] sm:text-xl">
-            Here are some of the projects I&rsquo;ve worked on, ranging from web
-            applications to full-stack platforms and personal tools. Each
-            project helped me develop new skills, solve real problems, and
-            push my understanding of technology further.
+            Here are some of the projects I&rsquo;ve worked on, ranging from
+            full-stack web platforms to mobile apps and low-level systems
+            programming in C. Each project helped me develop new skills,
+            solve real problems, and push my understanding of technology
+            further.
           </p>
         </div>
 

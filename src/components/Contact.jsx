@@ -1,7 +1,5 @@
 import { ArrowUp, Mail } from 'lucide-react'
 
-// lucide-react dropped brand/logo marks, so GitHub and LinkedIn are authored
-// inline as the standard flat brand glyphs (viewBox 0 0 24 24, fill: currentColor).
 function GithubIcon({ size = 16, ...props }) {
   return (
     <svg viewBox="0 0 24 24" width={size} height={size} fill="currentColor" {...props}>

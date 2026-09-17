@@ -1,12 +1,9 @@
-import { Briefcase, Code2, Layers, Lightbulb, Wrench } from 'lucide-react'
-
 const SKILL_CATEGORIES = [
   {
     id: 'languages',
     title: 'Languages',
     description: 'Core programming languages I use to build and ship software.',
-    icon: Code2,
-    accent: 'indigo',
+    accent: 'technical',
     span: 'lg:col-span-2',
     skills: ['Java', 'Python', 'JavaScript', 'TypeScript', 'C', 'HTML/CSS', 'SQL', 'C++'],
   },
@@ -15,8 +12,7 @@ const SKILL_CATEGORIES = [
     title: 'Frameworks & Libraries',
     description:
       'Modern frameworks and libraries I use to build scalable, performant applications.',
-    icon: Layers,
-    accent: 'blue',
+    accent: 'technical',
     span: 'lg:col-span-2',
     skills: [
       'React',
@@ -37,8 +33,7 @@ const SKILL_CATEGORIES = [
     id: 'tools',
     title: 'Tools & Platforms',
     description: 'Tools and platforms that help me build, deploy, and manage applications.',
-    icon: Wrench,
-    accent: 'cyan',
+    accent: 'technical',
     span: 'lg:col-span-2',
     skills: [
       'Git/GitHub',
@@ -62,8 +57,7 @@ const SKILL_CATEGORIES = [
     title: 'Concepts',
     description:
       'Core computer science and software engineering concepts I apply to solve real problems.',
-    icon: Lightbulb,
-    accent: 'violet',
+    accent: 'technical',
     span: 'lg:col-span-3',
     skills: [
       'Full-Stack Development',
@@ -80,8 +74,7 @@ const SKILL_CATEGORIES = [
     title: 'Business & Product',
     description:
       'Business skills and product thinking that help me build solutions with real-world impact.',
-    icon: Briefcase,
-    accent: 'teal',
+    accent: 'business',
     span: 'sm:col-span-2 lg:col-span-3',
     skills: [
       'Customer Discovery',
@@ -93,46 +86,28 @@ const SKILL_CATEGORIES = [
 ]
 
 const ACCENTS = {
-  indigo: {
-    iconText: 'text-[#8b9dfb]',
-    iconBg: 'bg-[#8b9dfb]/10',
-    iconBorder: 'border-[#8b9dfb]/25',
-    hoverBorder: 'hover:border-[#8b9dfb]/35',
-    hoverGlow: 'hover:shadow-[0_0_60px_-30px_rgba(139,157,251,0.5)]',
+  technical: {
+    border: 'border-[var(--color-border)]',
+    hoverBorder: 'hover:border-[var(--color-border-strong)]',
+    hoverGlow: 'hover:shadow-[0_28px_56px_-32px_rgba(59,130,246,0.45)]',
+    pillHover:
+      'hover:border-[var(--color-accent)]/45 hover:bg-[var(--color-accent)]/[0.08] hover:text-[var(--color-text)]',
   },
-  blue: {
-    iconText: 'text-[#7EAFFF]',
-    iconBg: 'bg-[#7EAFFF]/10',
-    iconBorder: 'border-[#7EAFFF]/25',
-    hoverBorder: 'hover:border-[#7EAFFF]/35',
-    hoverGlow: 'hover:shadow-[0_0_60px_-30px_rgba(126,175,255,0.5)]',
-  },
-  cyan: {
-    iconText: 'text-[#5fc9f2]',
-    iconBg: 'bg-[#5fc9f2]/10',
-    iconBorder: 'border-[#5fc9f2]/25',
-    hoverBorder: 'hover:border-[#5fc9f2]/35',
-    hoverGlow: 'hover:shadow-[0_0_60px_-30px_rgba(95,201,242,0.5)]',
-  },
-  violet: {
-    iconText: 'text-[#c79bfa]',
-    iconBg: 'bg-[#c79bfa]/10',
-    iconBorder: 'border-[#c79bfa]/25',
-    hoverBorder: 'hover:border-[#c79bfa]/35',
-    hoverGlow: 'hover:shadow-[0_0_60px_-30px_rgba(199,155,250,0.5)]',
-  },
-  teal: {
-    iconText: 'text-[#4fd1c0]',
-    iconBg: 'bg-[#4fd1c0]/10',
-    iconBorder: 'border-[#4fd1c0]/25',
-    hoverBorder: 'hover:border-[#4fd1c0]/35',
-    hoverGlow: 'hover:shadow-[0_0_60px_-30px_rgba(79,209,192,0.45)]',
+  business: {
+    border: 'border-[rgba(245,158,11,0.18)]',
+    hoverBorder: 'hover:border-[var(--color-secondary)]/40',
+    hoverGlow: 'hover:shadow-[0_28px_56px_-32px_rgba(245,158,11,0.4)]',
+    pillHover:
+      'hover:border-[var(--color-secondary)]/45 hover:bg-[var(--color-secondary)]/[0.08] hover:text-[var(--color-text)]',
   },
 }
 
-function SkillPill({ skill }) {
+function SkillPill({ skill, accent }) {
+  const a = ACCENTS[accent]
   return (
-    <span className="inline-flex rounded-full border border-[rgba(100,150,220,0.25)] px-3 py-[7px] text-[13px] font-medium text-[#A8B7D0] transition-colors duration-200 hover:border-[#7EAFFF]/40 hover:bg-[#7EAFFF]/[0.06] hover:text-[#F5F7FA]">
+    <span
+      className={`inline-flex rounded-full border border-[var(--color-border)] px-3 py-[7px] text-[13px] font-medium text-[var(--color-text-muted)] transition-colors duration-200 ${a.pillHover}`}
+    >
       {skill}
     </span>
   )
@@ -140,28 +115,21 @@ function SkillPill({ skill }) {
 
 function SkillCard({ category }) {
   const a = ACCENTS[category.accent]
-  const Icon = category.icon
 
   return (
     <div
-      className={`group flex flex-col rounded-[16px] border border-[rgba(100,150,220,0.25)] bg-[#0D1624] p-8 transition-[transform,box-shadow,border-color] duration-300 hover:-translate-y-0.5 ${a.hoverBorder} ${a.hoverGlow} ${category.span}`}
+      className={`group flex flex-col rounded-[16px] border ${a.border} bg-[var(--color-surface)] p-8 shadow-[0_1px_2px_rgba(0,0,0,0.4)] transition-[transform,box-shadow,border-color] duration-300 hover:-translate-y-0.5 ${a.hoverBorder} ${a.hoverGlow} ${category.span}`}
     >
-      <span
-        className={`flex h-[60px] w-[60px] shrink-0 items-center justify-center rounded-[12px] border ${a.iconBorder} ${a.iconBg}`}
-      >
-        <Icon className={`h-6 w-6 ${a.iconText}`} strokeWidth={1.5} aria-hidden="true" />
-      </span>
+      <h3 className="text-xl font-bold text-[var(--color-text)]">{category.title}</h3>
 
-      <h3 className="mt-5 text-xl font-bold text-[#F5F7FA]">{category.title}</h3>
-
-      <p className="mt-2.5 text-[0.95rem] leading-relaxed text-[#A8B7D0]">
+      <p className="mt-2.5 text-[0.95rem] leading-relaxed text-[var(--color-text-muted)]">
         {category.description}
       </p>
 
       <ul className="mt-6 flex flex-wrap gap-2">
         {category.skills.map((skill) => (
           <li key={skill}>
-            <SkillPill skill={skill} />
+            <SkillPill skill={skill} accent={category.accent} />
           </li>
         ))}
       </ul>
@@ -173,20 +141,15 @@ function Skills() {
   return (
     <section
       id="skills"
-      className="relative overflow-hidden bg-[var(--navy-deep)] px-[clamp(1.5rem,6vw,5rem)] py-[clamp(4rem,10vw,9rem)] scroll-mt-[var(--nav-height)]"
+      className="relative overflow-hidden px-[clamp(1.5rem,6vw,5rem)] py-[clamp(2.5rem,6vw,4.5rem)] scroll-mt-[var(--nav-height)]"
     >
-      <div
-        className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_60%_45%_at_50%_0%,rgba(90,120,190,0.09),transparent_65%)]"
-        aria-hidden="true"
-      />
-
       <div className="relative mx-auto flex max-w-[1300px] flex-col gap-14 sm:gap-16">
         <div className="flex flex-col gap-4 sm:gap-5">
-          <h2 className="text-[clamp(1.85rem,3.5vw,2.5rem)] font-bold leading-tight tracking-tight text-[var(--name-warm-white)]">
+          <h2 className="text-[clamp(1.85rem,3.5vw,2.5rem)] font-bold leading-tight tracking-tight text-[var(--color-text)]">
             Skills
           </h2>
 
-          <p className="max-w-[650px] text-lg leading-relaxed text-[var(--body-slate)] sm:text-xl">
+          <p className="max-w-[650px] text-lg leading-relaxed text-[var(--color-text-muted)] sm:text-xl">
             A combination of technical expertise and business thinking, built
             through hands-on experience and continuous learning.
           </p>

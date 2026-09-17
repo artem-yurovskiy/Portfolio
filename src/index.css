@@ -4,25 +4,32 @@
   --font-display: 'Inter', system-ui, sans-serif;
   --font-body: 'Inter', system-ui, sans-serif;
 
-  --color-paper: #faf9f8;
-  --color-ink: #111114;
-  --color-accent: #2a4fff;
+  --color-paper: #0f1419;
+  --color-ink: #e4e9ef;
+  --color-accent: #3b82f6;
 }
 
 :root {
   color-scheme: dark;
   font-family: 'Inter', system-ui, sans-serif;
 
-  --navy-deep: #080d16;
-  --navy-mid: #0d1420;
-  --navy-panel: #151b26;
-  --name-warm-white: #f5f6f8;
-  --body-slate: #a6aebb;
-  --portrait-border: rgba(148, 163, 184, 0.4);
-  --portrait-glow: rgba(74, 104, 168, 0.32);
-  --portrait-icon: rgba(198, 208, 224, 0.32);
-  --selection-bg: rgba(122, 162, 255, 0.35);
-  --selection-fg: #fff;
+  --color-bg: #0f1419;
+  --color-surface: #1a222c;
+  --color-surface-strong: #212b38;
+  --color-text: #e4e9ef;
+  --color-text-muted: #93a0b3;
+  --color-accent: #3b82f6;
+  --color-accent-strong: #2563eb;
+  --color-secondary: #f59e0b;
+  --color-secondary-strong: #d97706;
+  --color-border: rgba(59, 130, 246, 0.16);
+  --color-border-strong: rgba(59, 130, 246, 0.36);
+  --color-contact-bg: #000000;
+  --color-contact-border: rgba(255, 255, 255, 0.08);
+  --portrait-border: rgba(59, 130, 246, 0.35);
+  --portrait-glow: rgba(59, 130, 246, 0.3);
+  --selection-bg: rgba(59, 130, 246, 0.35);
+  --selection-fg: #ffffff;
   --nav-height: 4.5rem;
 
   scroll-behavior: smooth;
@@ -41,5 +48,17 @@
 body {
   margin: 0;
   min-height: 100svh;
-  background: var(--navy-deep);
+  background-color: var(--color-bg);
+  background-image: radial-gradient(
+    ellipse 65% 55% at 50% -8%,
+    rgba(59, 130, 246, 0.14),
+    transparent 62%
+  );
+  background-attachment: fixed;
+  background-repeat: no-repeat;
+}
+
+::selection {
+  background: var(--selection-bg);
+  color: var(--selection-fg);
 }

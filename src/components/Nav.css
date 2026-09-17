@@ -6,10 +6,10 @@
   z-index: 100;
   display: flex;
   flex-direction: column;
-  background: rgba(8, 13, 22, 0.6);
+  background: rgba(15, 20, 25, 0.68);
   backdrop-filter: blur(14px);
   -webkit-backdrop-filter: blur(14px);
-  border-bottom: 1px solid rgba(148, 163, 184, 0.14);
+  border-bottom: 1px solid var(--color-border);
   opacity: 1;
   transition: opacity 0.2s ease;
 }
@@ -33,9 +33,9 @@ body.modal-open .nav {
 .nav__mark {
   font-family: 'Inter', system-ui, sans-serif;
   font-weight: 600;
-  font-size: 0.95rem;
+  font-size: 1.15rem;
   letter-spacing: -0.01em;
-  color: var(--name-warm-white);
+  color: var(--color-text);
   text-decoration: none;
 }
 
@@ -48,51 +48,42 @@ body.modal-open .nav {
 .nav__links {
   display: flex;
   align-items: center;
-  gap: 2.5rem;
+  gap: 0.25rem;
   list-style: none;
   margin: 0;
   padding: 0;
 }
 
 .nav__links a {
+  display: inline-flex;
+  align-items: center;
+  border-radius: 999px;
+  padding: 0.45rem 0.9rem;
   font-family: 'Inter', system-ui, sans-serif;
   font-size: 0.95rem;
-  color: var(--body-slate);
+  color: var(--color-text-muted);
   text-decoration: none;
-  transition: color 0.2s ease;
+  transition: color 0.2s ease, background-color 0.2s ease;
 }
 
 .nav__links a:hover {
-  color: var(--name-warm-white);
+  color: var(--color-text);
 }
 
-.nav__mark:focus-visible,
-.nav__links a:focus-visible {
-  outline: 1px solid var(--portrait-border);
+.nav__links a.is-active {
+  color: var(--color-accent);
+  font-weight: 500;
+  background: rgba(59, 130, 246, 0.14);
+}
+
+.nav__mark:focus-visible {
+  outline: 1px solid var(--color-accent);
   outline-offset: 4px;
   border-radius: 2px;
 }
 
-.nav__resume {
-  display: inline-flex;
-  align-items: center;
-  border-radius: 999px;
-  padding: 0.5rem 1.15rem;
-  background: var(--name-warm-white);
-  color: var(--navy-deep);
-  font-family: 'Inter', system-ui, sans-serif;
-  font-weight: 600;
-  font-size: 0.85rem;
-  text-decoration: none;
-  transition: opacity 0.2s ease;
-}
-
-.nav__resume:hover {
-  opacity: 0.88;
-}
-
-.nav__resume:focus-visible {
-  outline: 1px solid var(--portrait-border);
+.nav__links a:focus-visible {
+  outline: 1px solid var(--color-accent);
   outline-offset: 2px;
 }
 
@@ -109,7 +100,7 @@ body.modal-open .nav {
 }
 
 .nav__toggle:focus-visible {
-  outline: 1px solid var(--portrait-border);
+  outline: 1px solid var(--color-accent);
   outline-offset: 2px;
   border-radius: 2px;
 }
@@ -119,7 +110,7 @@ body.modal-open .nav {
   display: block;
   width: 20px;
   height: 1px;
-  background: var(--name-warm-white);
+  background: var(--color-text);
   transition:
     background 0.2s ease 0.05s,
     opacity 0.2s ease 0.05s;
@@ -132,7 +123,7 @@ body.modal-open .nav {
   left: 0;
   width: 20px;
   height: 1px;
-  background: var(--name-warm-white);
+  background: var(--color-text);
   transition:
     top 0.2s ease,
     transform 0.2s ease 0.2s;
@@ -171,7 +162,7 @@ body.modal-open .nav {
   display: none;
 }
 
-@media (max-width: 720px) {
+@media (max-width: 1024px) {
   .nav__links {
     display: none;
   }
@@ -183,10 +174,10 @@ body.modal-open .nav {
   .nav__mobile {
     display: grid;
     grid-template-rows: 0fr;
-    background: rgba(8, 13, 22, 0.92);
+    background: rgba(15, 20, 25, 0.96);
     backdrop-filter: blur(14px);
     -webkit-backdrop-filter: blur(14px);
-    border-bottom: 1px solid rgba(148, 163, 184, 0.14);
+    border-bottom: 1px solid var(--color-border);
     transition: grid-template-rows 0.25s ease;
   }
 
@@ -206,13 +197,20 @@ body.modal-open .nav {
     padding: 1rem clamp(1.5rem, 6vw, 5rem);
     font-family: 'Inter', system-ui, sans-serif;
     font-size: 0.95rem;
-    color: var(--body-slate);
+    color: var(--color-text-muted);
     text-decoration: none;
+    transition: color 0.2s ease, background-color 0.2s ease;
   }
 
   .nav__mobile a:hover,
   .nav__mobile a:focus-visible {
-    color: var(--name-warm-white);
+    color: var(--color-text);
+  }
+
+  .nav__mobile a.is-active {
+    color: var(--color-accent);
+    font-weight: 500;
+    background: rgba(59, 130, 246, 0.12);
   }
 }
 

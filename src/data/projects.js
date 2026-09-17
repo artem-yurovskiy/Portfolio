@@ -1,7 +1,6 @@
-export const PROJECTS = [
+export const TECHNICAL_PROJECTS = [
   {
     title: 'Forge',
-    image: '/projects/forge.png',
     shortDescription:
       'A mobile app that combines workout tracking, diet/macro logging, social features, and AI-based fitness guidance into a single platform.',
     description:
@@ -18,7 +17,6 @@ export const PROJECTS = [
   },
   {
     title: 'Online Marketplace',
-    image: '/project_placeholder.webp',
     shortDescription:
       'A Java-based e-commerce marketplace, for sellers to list and manage products and for buyers to browse stores and place orders.',
     description:
@@ -35,7 +33,6 @@ export const PROJECTS = [
   },
   {
     title: 'Custom Memory Allocator',
-    image: '/project_placeholder.webp',
     shortDescription:
       "A custom heap allocator built in C, managing memory manually instead of relying on the standard library's malloc and free.",
     description:
@@ -52,7 +49,6 @@ export const PROJECTS = [
   },
   {
     title: 'Wordle Unlimited',
-    image: '/project_placeholder.webp',
     shortDescription:
       'A JavaFX desktop clone of Wordle — the popular NYT word game where users have six tries to guess a hidden five-letter word.',
     description:
@@ -68,7 +64,6 @@ export const PROJECTS = [
   },
   {
     title: 'This Website!',
-    image: '/project_placeholder.webp',
     shortDescription: 'You are looking at it right now.',
     description: 'You are looking at it right now.',
     highlights: [

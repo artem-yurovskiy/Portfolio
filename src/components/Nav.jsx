@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import './Nav.css'
 
 // Add a new { href: '#section-id', label: 'Label' } entry here as new sections ship.
@@ -12,13 +12,74 @@ const LINKS = [
   { href: '#contact', label: 'Contact' },
 ]
 
+function scrollToHash(event, href) {
+  // Let modified/non-primary clicks behave normally (new tab, etc.).
+  if (event.button !== 0 || event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) {
+    return
+  }
+
+  const target = document.getElementById(href.slice(1))
+  if (!target) return
+
+  event.preventDefault()
+  // No explicit `behavior` here: it lets the element inherit the
+  // `scroll-behavior` set on `:root`, which already backs off to
+  // `auto` under prefers-reduced-motion.
+  target.scrollIntoView()
+}
+
 function Nav() {
   const [open, setOpen] = useState(false)
+  const [activeHref, setActiveHref] = useState(null)
+  const navRef = useRef(null)
+
+  useEffect(() => {
+    const sections = LINKS.map((link) => document.getElementById(link.href.slice(1))).filter(
+      Boolean,
+    )
+    if (sections.length === 0) return undefined
+
+    const navHeight = navRef.current?.offsetHeight ?? 0
+    const visibleSections = new Set()
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            visibleSections.add(entry.target.id)
+          } else {
+            visibleSections.delete(entry.target.id)
+          }
+        })
+
+        // Multiple sections can straddle the band at once; the one that
+        // appears earliest in page order is the one the visitor is "in".
+        const current = sections.find((section) => visibleSections.has(section.id))
+        setActiveHref(current ? `#${current.id}` : null)
+      },
+      // A thin horizontal band just under the fixed nav: a section counts as
+      // "current" only once its top has cleared the bar and before it's
+      // scrolled past the upper third of the viewport.
+      { rootMargin: `-${navHeight}px 0px -66% 0px`, threshold: 0 },
+    )
+
+    sections.forEach((section) => observer.observe(section))
+    return () => observer.disconnect()
+  }, [])
+
+  function handleLinkClick(event, href) {
+    scrollToHash(event, href)
+    setOpen(false)
+  }
 
   return (
-    <nav className="nav">
+    <nav className="nav" ref={navRef}>
       <div className="nav__inner">
-        <a href="#top" className="nav__mark" onClick={() => setOpen(false)}>
+        <a
+          href="#top"
+          className="nav__mark"
+          onClick={(event) => handleLinkClick(event, '#top')}
+        >
           Artem Yurovskiy
         </a>
 
@@ -26,14 +87,17 @@ function Nav() {
           <ul className="nav__links">
             {LINKS.map((link) => (
               <li key={link.href}>
-                <a href={link.href}>{link.label}</a>
+                <a
+                  href={link.href}
+                  className={link.href === activeHref ? 'is-active' : undefined}
+                  aria-current={link.href === activeHref ? 'true' : undefined}
+                  onClick={(event) => scrollToHash(event, link.href)}
+                >
+                  {link.label}
+                </a>
               </li>
             ))}
           </ul>
-
-          <a href="#resume" className="nav__resume" onClick={() => setOpen(false)}>
-            Resume
-          </a>
 
           <button
             type="button"
@@ -52,7 +116,12 @@ function Nav() {
         <ul className="nav__mobile-list">
           {LINKS.map((link) => (
             <li key={link.href}>
-              <a href={link.href} onClick={() => setOpen(false)}>
+              <a
+                href={link.href}
+                className={link.href === activeHref ? 'is-active' : undefined}
+                aria-current={link.href === activeHref ? 'true' : undefined}
+                onClick={(event) => handleLinkClick(event, link.href)}
+              >
                 {link.label}
               </a>
             </li>

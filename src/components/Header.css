@@ -5,12 +5,6 @@
   align-items: center;
   overflow: hidden;
   scroll-margin-top: var(--nav-height);
-  background: radial-gradient(
-      ellipse 70% 60% at 68% 42%,
-      var(--navy-panel) 0%,
-      transparent 60%
-    ),
-    linear-gradient(160deg, var(--navy-mid) 0%, var(--navy-deep) 65%);
   padding: clamp(3rem, 8vw, 6rem) clamp(1.5rem, 6vw, 5rem);
   padding-top: max(var(--nav-height), clamp(3rem, 8vw, 6rem));
 }
@@ -20,8 +14,8 @@
   inset: 0;
   pointer-events: none;
   background: radial-gradient(
-    circle at 50% 50%,
-    rgba(90, 120, 190, 0.14) 0%,
+    circle at 68% 42%,
+    rgba(59, 130, 246, 0.12) 0%,
     transparent 55%
   );
 }
@@ -49,11 +43,11 @@
   gap: 0.85rem;
   margin: 0 0 1.5rem;
   font-family: 'Inter', system-ui, sans-serif;
-  font-weight: 300;
+  font-weight: 500;
   font-size: 0.8rem;
   letter-spacing: 0.28em;
   text-transform: uppercase;
-  color: var(--body-slate);
+  color: var(--color-accent);
   animation: hero-rise 0.9s cubic-bezier(0.16, 1, 0.3, 1) both;
 }
 
@@ -61,7 +55,7 @@
   flex: 0 0 4rem;
   width: 4rem;
   height: 1px;
-  background: linear-gradient(90deg, var(--portrait-border), transparent);
+  background: linear-gradient(90deg, var(--color-accent), transparent);
 }
 
 .hero__name {
@@ -71,7 +65,7 @@
   font-size: clamp(2.75rem, 5.4vw, 5rem);
   line-height: 1.05;
   letter-spacing: -0.02em;
-  color: var(--name-warm-white);
+  color: var(--color-text);
   animation: hero-rise 0.9s cubic-bezier(0.16, 1, 0.3, 1) 0.08s both;
 }
 
@@ -82,7 +76,7 @@
   font-weight: 400;
   font-size: clamp(1.15rem, 1.3vw + 0.6rem, 1.5rem);
   line-height: 1.6;
-  color: var(--body-slate);
+  color: var(--color-text-muted);
   animation: hero-rise 0.9s cubic-bezier(0.16, 1, 0.3, 1) 0.18s both;
 }
 
@@ -118,14 +112,14 @@
   border: 1px solid var(--portrait-border);
   background: radial-gradient(
     circle at 34% 28%,
-    #24314a 0%,
-    #141c29 55%,
-    #0b111a 100%
+    #26364a 0%,
+    #1a222c 55%,
+    #0f1419 100%
   );
   box-shadow:
     inset 0 1px 0 rgba(255, 255, 255, 0.04),
-    0 50px 110px -30px var(--portrait-glow),
-    0 0 90px -20px var(--portrait-glow);
+    0 40px 90px -28px var(--portrait-glow),
+    0 16px 40px -18px rgba(59, 130, 246, 0.3);
 }
 
 .hero__portrait-img {
@@ -155,16 +149,11 @@
   }
 }
 
-.hero ::selection {
-  background: var(--selection-bg);
-  color: var(--selection-fg);
-}
-
 @media (max-width: 900px) {
   .hero {
     min-height: auto;
     padding: clamp(3.5rem, 12vw, 5rem) 1.5rem;
-    padding-top: max(var(--nav-height), clamp(3.5rem, 12vw, 5rem));
+    padding-top: calc(var(--nav-height) + clamp(2.5rem, 8vw, 4rem));
   }
 
   .hero__inner {

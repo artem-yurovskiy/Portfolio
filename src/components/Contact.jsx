@@ -1,4 +1,4 @@
-import { ArrowUp, ArrowUpRight, Mail } from 'lucide-react'
+import { ArrowUp, Mail } from 'lucide-react'
 
 // lucide-react dropped brand/logo marks, so GitHub and LinkedIn are authored
 // inline as the standard flat brand glyphs (viewBox 0 0 24 24, fill: currentColor).
@@ -21,7 +21,6 @@ function LinkedinIcon({ size = 16, ...props }) {
 const CONTACT_LINKS = [
   {
     id: 'email',
-    label: 'Email',
     value: 'artembedford@gmail.com',
     href: 'mailto:artembedford@gmail.com',
     Icon: Mail,
@@ -29,98 +28,80 @@ const CONTACT_LINKS = [
   },
   {
     id: 'linkedin',
-    label: 'LinkedIn',
-    value: 'Connect with me',
+    value: 'linkedin.com/in/artem-yurovskiy',
     href: 'https://www.linkedin.com/in/artem-yurovskiy/',
     Icon: LinkedinIcon,
     external: true,
   },
   {
     id: 'github',
-    label: 'GitHub',
-    value: 'View my projects',
+    value: 'github.com/artem-yurovskiy',
     href: 'https://github.com/artem-yurovskiy',
     Icon: GithubIcon,
     external: true,
   },
 ]
 
-function ContactCard({ link }) {
-  const { label, value, href, Icon, external } = link
+function ContactLink({ link }) {
+  const { value, href, Icon, external } = link
 
   return (
     <a
       href={href}
       {...(external ? { target: '_blank', rel: 'noopener noreferrer' } : {})}
-      className="group relative flex min-h-[150px] flex-col justify-between rounded-[18px] border border-[rgba(100,150,220,0.2)] bg-[#0D1624] p-6 text-left transition-[transform,border-color,background-color] duration-200 hover:-translate-y-1 hover:border-[#7EAFFF]/35 hover:bg-[#101a2c] focus-visible:outline focus-visible:outline-2 focus-visible:outline-[#7EAFFF] focus-visible:outline-offset-4 sm:min-h-[160px] sm:p-7"
+      className="group flex w-full items-center gap-4 rounded-[12px] border border-[var(--color-border)] bg-[var(--color-surface)] px-5 py-4 shadow-[0_1px_2px_rgba(0,0,0,0.4)] transition-[transform,border-color,background-color,box-shadow] duration-[180ms] ease-out hover:-translate-y-0.5 hover:border-[var(--color-accent)]/40 hover:shadow-[0_20px_40px_-24px_rgba(59,130,246,0.4)] focus-visible:outline focus-visible:outline-2 focus-visible:outline-[var(--color-accent)] focus-visible:outline-offset-4 sm:w-auto"
     >
-      <span className="flex h-10 w-10 items-center justify-center rounded-[10px] border border-[#7EAFFF]/25 bg-[#7EAFFF]/10 text-[#7EAFFF]">
-        <Icon size={18} aria-hidden="true" />
+      <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-[10px] border border-[var(--color-accent)]/25 bg-[var(--color-accent)]/10 text-[var(--color-accent)] transition-colors duration-[180ms]">
+        <Icon size={20} aria-hidden="true" />
       </span>
-
-      <span className="mt-5 flex flex-col gap-1 pr-6">
-        <span className="text-[1.05rem] font-semibold text-[var(--name-warm-white)]">
-          {label}
-        </span>
-        <span className="truncate text-sm text-[var(--body-slate)]">{value}</span>
+      <span className="truncate text-[15px] text-[var(--color-text-muted)] transition-colors duration-[180ms] group-hover:text-[var(--color-text)] sm:text-base">
+        {value}
       </span>
-
-      <ArrowUpRight
-        className="absolute bottom-6 right-6 h-4 w-4 text-[var(--body-slate)] transition-transform duration-200 group-hover:-translate-y-0.5 group-hover:translate-x-0.5 group-hover:text-[#7EAFFF] sm:bottom-7 sm:right-7"
-        aria-hidden="true"
-      />
     </a>
   )
 }
 
 function Contact() {
   return (
-    <section
-      id="contact"
-      className="relative overflow-hidden bg-[var(--navy-mid)] px-[clamp(1.5rem,6vw,5rem)] pb-[clamp(3.5rem,8vw,5rem)] pt-[clamp(6rem,14vw,10rem)] scroll-mt-[var(--nav-height)]"
-    >
-      <div
-        className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_55%_40%_at_50%_20%,rgba(126,175,255,0.07),transparent_70%)]"
-        aria-hidden="true"
-      />
+    <>
+      <section
+        id="contact"
+        className="bg-[var(--color-contact-bg)] px-[clamp(1.5rem,6vw,5rem)] pb-[clamp(48px,5vw,64px)] pt-[clamp(90px,10vw,120px)] scroll-mt-[var(--nav-height)]"
+      >
 
-      <div className="relative mx-auto flex max-w-[850px] flex-col items-center gap-8 text-center sm:gap-10">
-        <div className="flex flex-col items-center gap-5">
-          <h2 className="text-[clamp(2.25rem,6vw,4rem)] font-bold leading-tight tracking-tight text-[var(--name-warm-white)]">
-            Let&rsquo;s Connect
-          </h2>
+        <div className="relative mx-auto flex max-w-[1300px] flex-col items-center gap-8 text-center sm:gap-10">
+          <div className="flex flex-col items-center gap-4">
+            <h2 className="text-[clamp(1.5rem,3vw,2rem)] font-bold leading-tight tracking-tight text-[var(--color-text)]">
+              Get in Touch
+            </h2>
 
-          <p className="max-w-[650px] text-base leading-relaxed text-[var(--body-slate)] sm:text-lg">
-            I&rsquo;m always open to connecting, discussing opportunities, or
-            talking about interesting projects and ideas.
-          </p>
+            <p className="max-w-[650px] text-base leading-relaxed text-[var(--color-text-muted)] sm:text-lg">
+              I&rsquo;m always open to connecting, discussing opportunities, or
+              talking about interesting projects and ideas.
+            </p>
+          </div>
+
+          <div className="flex w-full max-w-[420px] flex-col items-stretch gap-3 sm:w-auto sm:max-w-none sm:flex-row sm:flex-wrap sm:items-center sm:justify-center sm:gap-x-10 sm:gap-y-4">
+            {CONTACT_LINKS.map((link) => (
+              <ContactLink key={link.id} link={link} />
+            ))}
+          </div>
         </div>
+      </section>
 
-        <div className="grid w-full grid-cols-1 gap-4 sm:grid-cols-2 sm:gap-5 md:grid-cols-3">
-          {CONTACT_LINKS.map((link) => (
-            <ContactCard key={link.id} link={link} />
-          ))}
-        </div>
-
-        <div className="mt-8 flex w-full flex-col items-center gap-8 sm:mt-10">
+      <footer className="border-t border-[var(--color-contact-border)] bg-[var(--color-contact-bg)] px-[clamp(1.5rem,6vw,5rem)] py-6">
+        <div className="mx-auto flex max-w-[1300px] justify-end">
           <button
             type="button"
             onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
-            className="inline-flex items-center gap-1.5 text-sm font-medium text-[var(--body-slate)] transition-colors duration-200 hover:text-[var(--name-warm-white)] focus-visible:outline focus-visible:outline-1 focus-visible:outline-[var(--portrait-border)] focus-visible:outline-offset-4"
+            className="inline-flex items-center gap-1.5 text-[13px] font-medium text-[var(--color-text-muted)] transition-colors duration-200 hover:text-[var(--color-accent)] focus-visible:outline focus-visible:outline-1 focus-visible:outline-[var(--color-accent)] focus-visible:outline-offset-4 sm:text-sm"
           >
-            <ArrowUp className="h-3.5 w-3.5" aria-hidden="true" />
             Back to top
+            <ArrowUp className="h-3.5 w-3.5" aria-hidden="true" />
           </button>
-
-          <div className="h-px w-full bg-white/10" aria-hidden="true" />
-
-          <div className="flex w-full flex-col items-center gap-2 text-sm text-[var(--body-slate)] sm:flex-row sm:justify-between">
-            <span>&copy; 2026 Artem Yurovskiy</span>
-            <span>Built with React</span>
-          </div>
         </div>
-      </div>
-    </section>
+      </footer>
+    </>
   )
 }
 

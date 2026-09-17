@@ -73,6 +73,6 @@ export const TECHNICAL_PROJECTS = [
     ],
     technologies: ['React', 'Tailwind CSS', 'Vercel'],
     liveUrl: '',
-    githubUrl: '',
+    githubUrl: 'https://github.com/artem-yurovskiy/Portfolio',
   },
 ]

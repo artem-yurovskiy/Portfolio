@@ -1,4 +1,4 @@
-import './Header.css'
+import "./Header.css";
 
 function Header() {
   return (
@@ -15,12 +15,12 @@ function Header() {
           <h1 className="hero__name">Artem Yurovskiy</h1>
 
           <p className="hero__bio">
-            I am a senior at Purdue University studying Computer Science with
-            a concentration in Software Engineering, a minor in Management,
-            and a certificate in Entrepreneurship &amp; Innovation. I like
-            building things end-to-end, from the database up through the
-            interface, and I&rsquo;m especially drawn to work that blends
-            technical depth with business thinking.
+            I am a computer science student at Purdue University with a
+            concentration in Software Engineering, a minor in Management, and a
+            certificate in Entrepreneurship &amp; Innovation. I like building
+            things end-to-end, from the database up through the interface, and
+            I&rsquo;m especially drawn to work that blends technical depth with
+            business thinking.
           </p>
         </div>
 
@@ -35,7 +35,7 @@ function Header() {
         </div>
       </div>
     </header>
-  )
+  );
 }
 
-export default Header
+export default Header;

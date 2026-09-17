@@ -218,7 +218,7 @@ function ProjectModal({ project, onRequestClose }) {
 
           <div className="mt-9">
             <h4 className="text-[0.75rem] font-medium uppercase tracking-[0.3em] text-[var(--color-accent)]">
-              What I Built
+              Highlights
             </h4>
             <ul className="mt-5 flex flex-col gap-4">
               {project.highlights.map((highlight) => (

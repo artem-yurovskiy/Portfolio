@@ -66,7 +66,6 @@ const SKILL_CATEGORIES = [
       'Payment Systems Integration',
       'Multithreading',
       'Socket Programming',
-      'Web Accessibility (WCAG)',
     ],
   },
   {

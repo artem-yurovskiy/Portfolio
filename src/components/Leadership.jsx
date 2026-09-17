@@ -6,7 +6,7 @@ const ACTIVITIES = [
     startDate: 'Sep 2020',
     endDate: 'Apr 2023',
     description:
-      'Led a team of 6 programmers building real-time robot control systems, winning 2nd Place Control Award at NH States.',
+      'Led a team of 6 programmers in building real-time robot control systems, winning 2nd Place Control Award at NH States.',
   },
 ]
 

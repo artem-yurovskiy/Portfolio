@@ -1,58 +1,60 @@
-import { Calendar } from 'lucide-react'
+import { Calendar } from "lucide-react";
 
 const EXPERIENCES = [
   {
-    role: 'Full-Stack Developer',
-    company: 'Verbs & Vibes',
-    companyUrl: 'https://verbsandvibes.vercel.app/',
-    previewImage: '/VerbsAndVibes.webp',
-    location: 'Manchester, NH',
-    startDate: 'May 2026',
-    endDate: 'Present',
+    role: "Full-Stack Developer",
+    company: "Verbs & Vibes",
+    companyUrl: "https://verbsandvibes.vercel.app/",
+    previewImage: "/VerbsAndVibes.webp",
+    location: "Manchester, NH",
+    startDate: "May 2026",
+    endDate: "Present",
     description:
-      'Designed and built a production full-stack web application for a language and culture club startup, spanning a public marketing site, e-commerce and subscription payments, a booking system, and an internal admin dashboard.',
+      "Designed and built a production full-stack web application for a language and culture club startup, spanning a public marketing site, e-commerce and subscription payments, a booking system, and an internal admin dashboard.",
     highlights: [
       {
-        text: 'Built with Next.js and the App Router, covering marketing pages, class registration, and event ticketing.',
-        emphasize: ['Next.js', 'App Router'],
+        text: "Built with Next.js and the App Router, covering marketing pages, class registration, and event ticketing.",
+        emphasize: ["Next.js", "App Router"],
       },
       {
-        text: 'Worked directly with the business owner to gather requirements and translate day-to-day operational needs (class scheduling, membership pricing, event capacity) into functional features.',
-        emphasize: ['business owner', 'functional features'],
+        text: "Worked directly with the business owner to gather requirements and translate day-to-day operational needs (class scheduling, membership pricing, event capacity) into functional features.",
+        emphasize: ["business owner", "functional features"],
       },
       {
-        text: 'Designed a unified Stripe checkout handling 4 product types, including course enrollment, gift cards, event tickets, and recurring memberships. Every order flows through a signed webhook handler with idempotent, atomic fulfillment to prevent duplicate charges.',
-        emphasize: ['Stripe checkout', '4 product types'],
+        text: "Designed a unified Stripe checkout handling 4 product types, including course enrollment, gift cards, event tickets, and recurring memberships. Every order flows through a signed webhook handler with idempotent, atomic fulfillment to prevent duplicate charges.",
+        emphasize: ["Stripe checkout", "4 product types"],
       },
       {
-        text: 'Modeled a Supabase backend to store and manage bookings, orders, memberships, and user data across the entire platform.',
-        emphasize: ['Supabase backend'],
+        text: "Modeled a Supabase backend to store and manage bookings, orders, memberships, and user data across the entire platform.",
+        emphasize: ["Supabase backend"],
       },
       {
-        text: 'Built an internal admin dashboard giving staff real-time control over classes, bookings, and waitlists.',
-        emphasize: ['admin dashboard'],
+        text: "Built an internal admin dashboard giving staff real-time control over classes, bookings, and waitlists.",
+        emphasize: ["admin dashboard"],
       },
       {
-        text: 'Used Claude Code to cut development time, shipping features faster across the full-stack build.',
-        emphasize: ['Claude Code'],
+        text: "Used Claude Code to cut development time, shipping features faster across production.",
+        emphasize: ["Claude Code"],
       },
     ],
     technologies: [
-      'Next.js',
-      'JavaScript',
-      'Supabase/PostgreSQL',
-      'Stripe API',
-      'Tailwind CSS',
-      'Node.js',
+      "Next.js",
+      "JavaScript",
+      "Supabase/PostgreSQL",
+      "Stripe API",
+      "Tailwind CSS",
+      "Node.js",
     ],
   },
-]
+];
 
 function withEmphasis(text, terms) {
-  if (!terms || terms.length === 0) return text
+  if (!terms || terms.length === 0) return text;
 
-  const escaped = terms.map((term) => term.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'))
-  const pattern = new RegExp(`(${escaped.join('|')})`, 'g')
+  const escaped = terms.map((term) =>
+    term.replace(/[.*+?^${}()|[\]\\]/g, "\\$&"),
+  );
+  const pattern = new RegExp(`(${escaped.join("|")})`, "g");
 
   return text.split(pattern).map((part, index) =>
     terms.includes(part) ? (
@@ -62,7 +64,7 @@ function withEmphasis(text, terms) {
     ) : (
       <span key={index}>{part}</span>
     ),
-  )
+  );
 }
 
 function SitePreview({ experience }) {
@@ -74,11 +76,20 @@ function SitePreview({ experience }) {
       className="group/preview block overflow-hidden rounded-[14px] border border-[var(--color-border)] transition-colors duration-200 hover:border-[var(--color-accent)]/45"
     >
       <div className="flex items-center gap-1.5 border-b border-[var(--color-border)] bg-[var(--color-surface-strong)] px-4 py-2.5">
-        <span className="h-2.5 w-2.5 rounded-full bg-[var(--color-text-muted)]/25" aria-hidden="true" />
-        <span className="h-2.5 w-2.5 rounded-full bg-[var(--color-text-muted)]/25" aria-hidden="true" />
-        <span className="h-2.5 w-2.5 rounded-full bg-[var(--color-text-muted)]/25" aria-hidden="true" />
+        <span
+          className="h-2.5 w-2.5 rounded-full bg-[var(--color-text-muted)]/25"
+          aria-hidden="true"
+        />
+        <span
+          className="h-2.5 w-2.5 rounded-full bg-[var(--color-text-muted)]/25"
+          aria-hidden="true"
+        />
+        <span
+          className="h-2.5 w-2.5 rounded-full bg-[var(--color-text-muted)]/25"
+          aria-hidden="true"
+        />
         <span className="ml-3 truncate text-xs font-medium text-[var(--color-text-muted)]">
-          {experience.companyUrl.replace('https://', '')}
+          {experience.companyUrl.replace("https://", "")}
         </span>
       </div>
       <div className="aspect-[16/10] w-full overflow-hidden bg-[var(--color-surface-strong)]">
@@ -89,7 +100,7 @@ function SitePreview({ experience }) {
         />
       </div>
     </a>
-  )
+  );
 }
 
 function ExperienceCard({ experience }) {
@@ -109,11 +120,15 @@ function ExperienceCard({ experience }) {
                 className="font-bold text-[var(--color-text)] underline decoration-[var(--color-accent)]/45 underline-offset-4 transition-colors hover:decoration-[var(--color-accent)]"
               >
                 {experience.company}
-              </a>{' '}
+              </a>{" "}
               — {experience.location}
             </p>
             <p className="flex items-center gap-2 text-sm font-medium text-[var(--color-text-muted)]">
-              <Calendar className="h-[18px] w-[18px] text-[var(--color-text-muted)]" strokeWidth={1.5} aria-hidden="true" />
+              <Calendar
+                className="h-[18px] w-[18px] text-[var(--color-text-muted)]"
+                strokeWidth={1.5}
+                aria-hidden="true"
+              />
               {experience.startDate} – {experience.endDate}
             </p>
           </div>
@@ -166,7 +181,7 @@ function ExperienceCard({ experience }) {
         </ul>
       </div>
     </div>
-  )
+  );
 }
 
 function Experience() {
@@ -185,7 +200,7 @@ function Experience() {
         ))}
       </div>
     </section>
-  )
+  );
 }
 
-export default Experience
+export default Experience;

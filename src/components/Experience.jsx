@@ -8,7 +8,7 @@ const EXPERIENCES = [
     previewImage: "/VerbsAndVibes.webp",
     location: "Manchester, NH",
     startDate: "May 2026",
-    endDate: "Present",
+    endDate: "August 2026",
     description:
       "Designed and built a production full-stack web application for a language and culture club startup, spanning a public marketing site, e-commerce and subscription payments, a booking system, and an internal admin dashboard.",
     highlights: [
